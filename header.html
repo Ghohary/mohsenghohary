@@ -1,127 +1,170 @@
 <!-- Navigation -->
-<nav id="main-nav" class="fixed w-full z-50 bg-transparent transition-all duration-500 py-4">
-    <div class="w-full px-4 sm:px-6 lg:px-8">
+<nav id="main-nav" class="fixed w-full z-50 bg-transparent transition-all duration-700 py-6 lg:py-8">
+    <div class="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
         <div class="flex items-center justify-between">
             <!-- Left side: Hamburger and Search -->
-            <div class="flex-1 flex items-center space-x-6">
+            <div class="flex-1 flex items-center space-x-8 lg:space-x-10">
                 <!-- Hamburger menu -->
-                <button id="hamburger-btn" class="cursor-pointer text-white">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                <button id="hamburger-btn" class="group cursor-pointer text-white hover:text-gray-300 transition-colors duration-300">
+                    <svg class="w-6 h-6 lg:w-7 lg:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                 </button>
                 
                 <!-- Search icon -->
-                <button id="search-btn" class="cursor-pointer text-white">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                <button id="search-btn" class="group cursor-pointer text-white hover:text-gray-300 transition-all duration-300 transform hover:scale-110">
+                    <svg class="w-5 h-5 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                     </svg>
                 </button>
             </div>
             
             <!-- Logo centered -->
             <div class="flex-1 text-center">
-                <a href="index.html" class="text-1xl font-light tracking-widest text-white whitespace-nowrap">
+                <a href="index.html" class="text-xl sm:text-2xl lg:text-3xl font-light tracking-[0.3em] lg:tracking-[0.4em] text-white whitespace-nowrap hover:text-gray-300 transition-colors duration-300">
                     MOHSEN GHOHARY
                 </a>
             </div>
             
             <!-- Right side: Account and Shopping bag -->
-            <div class="flex-1 flex justify-end items-center space-x-6">
+            <div class="flex-1 flex justify-end items-center space-x-8 lg:space-x-10">
                 <!-- Account icon -->
-                <button class="cursor-pointer text-white">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                <button class="group cursor-pointer text-white hover:text-gray-300 transition-all duration-300 transform hover:scale-110">
+                    <svg class="w-5 h-5 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                     </svg>
                 </button>
                 
-                <!-- Shopping bag icon -->
-                <button class="cursor-pointer text-white">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                <!-- Shopping bag icon with badge -->
+                <button class="group cursor-pointer text-white hover:text-gray-300 transition-all duration-300 transform hover:scale-110 relative">
+                    <svg class="w-5 h-5 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
                     </svg>
+                    <!-- Shopping cart count badge -->
+                    <span class="absolute -top-2 -right-2 bg-white text-black text-xs w-5 h-5 rounded-full flex items-center justify-center font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">0</span>
                 </button>
             </div>
         </div>
         
-        <!-- Desktop Menu centered below -->
-        <div class="hidden md:flex items-center justify-center space-x-8 font-sans text-sm tracking-wide mt-6">
-            <a href="index.html#collections" class="text-white transition-colors duration-300">COLLECTIONS</a>
-            <a href="index.html#products" class="text-white transition-colors duration-300">SHOP</a>
-            <a href="index.html#about" class="text-white transition-colors duration-300">ABOUT</a>
-            <a href="index.html#contact" class="text-white transition-colors duration-300">CONTACT</a>
+        <!-- Desktop Menu centered below with elegant separator -->
+        <div class="hidden md:flex flex-col items-center mt-8 lg:mt-10">
+            <!-- Elegant separator line -->
+            <div class="w-24 h-px bg-white/30 mb-6"></div>
+            <div class="flex items-center justify-center space-x-12 lg:space-x-16 font-sans text-sm lg:text-base tracking-[0.2em] lg:tracking-[0.3em]">
+                <a href="index.html#collections" class="text-white hover:text-gray-300 transition-all duration-300 relative group">
+                    COLLECTIONS
+                    <span class="absolute -bottom-1 left-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="index.html#products" class="text-white hover:text-gray-300 transition-all duration-300 relative group">
+                    SHOP
+                    <span class="absolute -bottom-1 left-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="index.html#about" class="text-white hover:text-gray-300 transition-all duration-300 relative group">
+                    ABOUT
+                    <span class="absolute -bottom-1 left-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="index.html#contact" class="text-white hover:text-gray-300 transition-all duration-300 relative group">
+                    CONTACT
+                    <span class="absolute -bottom-1 left-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full"></span>
+                </a>
+            </div>
         </div>
     </div>
 </nav>
 
 <!-- Search Overlay (Hidden by default) -->
-<div id="search-overlay" class="fixed inset-0 bg-white z-50 hidden flex items-center justify-center">
-    <div class="max-w-3xl w-full px-6">
-        <!-- Close button -->
-        <div class="flex justify-end mb-8">
-            <button id="close-search-btn" class="text-gray-900 hover:text-gray-600 transition-colors">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+<div id="search-overlay" class="fixed inset-0 bg-white/95 backdrop-blur-md z-50 hidden flex items-center justify-center">
+    <div class="max-w-4xl w-full px-6">
+        <!-- Close button with elegant styling -->
+        <div class="flex justify-end mb-12">
+            <button id="close-search-btn" class="text-gray-900 hover:text-gray-600 transition-all duration-300 transform hover:scale-110 hover:rotate-90">
+                <svg class="w-8 h-8 lg:w-10 lg:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
         </div>
         
-        <!-- Search Input -->
-        <div class="relative">
+        <!-- Search Input with luxury styling -->
+        <div class="relative mb-8">
             <input 
                 type="text" 
-                placeholder="Search for products..." 
-                class="w-full text-4xl md:text-6xl font-light border-b-2 border-gray-300 focus:border-black outline-none py-4 tracking-wide"
+                placeholder="Search for luxury items..." 
+                class="w-full text-3xl md:text-5xl lg:text-6xl font-light border-b border-gray-200 focus:border-black outline-none py-6 lg:py-8 tracking-wide placeholder-gray-400 transition-all duration-300"
                 autofocus
             />
-            <svg class="w-8 h-8 absolute right-0 bottom-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            <svg class="w-8 h-8 lg:w-10 lg:h-10 absolute right-0 bottom-6 lg:bottom-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
         </div>
         
-        <!-- Popular Searches -->
-        <div class="mt-12">
-            <p class="text-sm font-sans tracking-widest text-gray-500 mb-4">POPULAR SEARCHES</p>
-            <div class="flex flex-wrap gap-3">
-                <a href="#" class="px-4 py-2 border border-gray-300 hover:border-black hover:bg-black hover:text-white transition-all font-sans text-sm tracking-wide">Dresses</a>
-                <a href="#" class="px-4 py-2 border border-gray-300 hover:border-black hover:bg-black hover:text-white transition-all font-sans text-sm tracking-wide">Handbags</a>
-                <a href="#" class="px-4 py-2 border border-gray-300 hover:border-black hover:bg-black hover:text-white transition-all font-sans text-sm tracking-wide">Shoes</a>
-                <a href="#" class="px-4 py-2 border border-gray-300 hover:border-black hover:bg-black hover:text-white transition-all font-sans text-sm tracking-wide">Accessories</a>
-                <a href="#" class="px-4 py-2 border border-gray-300 hover:border-black hover:bg-black hover:text-white transition-all font-sans text-sm tracking-wide">New Arrivals</a>
+        <!-- Popular Searches with luxury styling -->
+        <div class="mt-16">
+            <div class="flex items-center mb-8">
+                <div class="w-12 h-px bg-gray-300 mr-4"></div>
+                <p class="text-sm font-sans tracking-[0.3em] text-gray-500">POPULAR SEARCHES</p>
+                <div class="w-12 h-px bg-gray-300 ml-4"></div>
+            </div>
+            <div class="flex flex-wrap gap-4 justify-center">
+                <a href="#" class="px-6 py-3 border border-gray-200 hover:border-black hover:bg-black hover:text-white transition-all duration-300 font-sans text-sm tracking-[0.2em] hover:shadow-lg transform hover:-translate-y-1">READY-TO-WEAR</a>
+                <a href="#" class="px-6 py-3 border border-gray-200 hover:border-black hover:bg-black hover:text-white transition-all duration-300 font-sans text-sm tracking-[0.2em] hover:shadow-lg transform hover:-translate-y-1">ABAYA</a>
+                <a href="#" class="px-6 py-3 border border-gray-200 hover:border-black hover:bg-black hover:text-white transition-all duration-300 font-sans text-sm tracking-[0.2em] hover:shadow-lg transform hover:-translate-y-1">COUTURE</a>
+                <a href="#" class="px-6 py-3 border border-gray-200 hover:border-black hover:bg-black hover:text-white transition-all duration-300 font-sans text-sm tracking-[0.2em] hover:shadow-lg transform hover:-translate-y-1">BRIDAL</a>
+                <a href="#" class="px-6 py-3 border border-gray-200 hover:border-black hover:bg-black hover:text-white transition-all duration-300 font-sans text-sm tracking-[0.2em] hover:shadow-lg transform hover:-translate-y-1">ACCESSORIES</a>
             </div>
         </div>
     </div>
 </div>
 
 <!-- Mobile Menu Overlay (Hidden by default) -->
-<div id="mobile-menu" class="fixed inset-0 bg-black/95 z-50 hidden">
+<div id="mobile-menu" class="fixed inset-0 bg-black/98 backdrop-blur-sm z-50 hidden">
     <div class="flex flex-col h-full">
         <!-- Close button -->
-        <div class="flex justify-end p-6">
-            <button id="close-menu-btn" class="text-white hover:text-gray-400 transition-colors">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        <div class="flex justify-end p-6 lg:p-8">
+            <button id="close-menu-btn" class="text-white hover:text-gray-400 transition-all duration-300 transform hover:scale-110 hover:rotate-90">
+                <svg class="w-8 h-8 lg:w-10 lg:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
         </div>
         
-        <!-- Menu Items -->
-        <div class="flex-1 flex flex-col items-center justify-center space-y-8 font-sans text-white">
-            <a href="index.html" class="text-3xl tracking-widest hover:text-gray-400 transition-colors menu-link">HOME</a>
-            <a href="index.html#collections" class="text-3xl tracking-widest hover:text-gray-400 transition-colors menu-link">COLLECTIONS</a>
-            <a href="index.html#products" class="text-3xl tracking-widest hover:text-gray-400 transition-colors menu-link">SHOP</a>
-            <a href="index.html#about" class="text-3xl tracking-widest hover:text-gray-400 transition-colors menu-link">ABOUT</a>
-            <a href="index.html#contact" class="text-3xl tracking-widest hover:text-gray-400 transition-colors menu-link">CONTACT</a>
+        <!-- Menu Items with luxury styling -->
+        <div class="flex-1 flex flex-col items-center justify-center space-y-10 font-sans text-white">
+            <a href="index.html" class="text-3xl lg:text-4xl tracking-[0.3em] hover:text-gray-400 transition-all duration-300 menu-link relative group">
+                HOME
+                <span class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-px bg-white transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="index.html#collections" class="text-3xl lg:text-4xl tracking-[0.3em] hover:text-gray-400 transition-all duration-300 menu-link relative group">
+                COLLECTIONS
+                <span class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-px bg-white transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="index.html#products" class="text-3xl lg:text-4xl tracking-[0.3em] hover:text-gray-400 transition-all duration-300 menu-link relative group">
+                SHOP
+                <span class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-px bg-white transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="index.html#about" class="text-3xl lg:text-4xl tracking-[0.3em] hover:text-gray-400 transition-all duration-300 menu-link relative group">
+                ABOUT
+                <span class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-px bg-white transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="index.html#contact" class="text-3xl lg:text-4xl tracking-[0.3em] hover:text-gray-400 transition-all duration-300 menu-link relative group">
+                CONTACT
+                <span class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-px bg-white transition-all duration-300 group-hover:w-full"></span>
+            </a>
         </div>
         
-        <!-- Social Media -->
-        <div class="p-6 text-center">
-            <div class="flex justify-center space-x-6 mb-6">
-                <a href="#" class="text-white hover:text-gray-400 transition-colors text-sm tracking-widest">INSTAGRAM</a>
-                <a href="#" class="text-white hover:text-gray-400 transition-colors text-sm tracking-widest">FACEBOOK</a>
-                <a href="#" class="text-white hover:text-gray-400 transition-colors text-sm tracking-widest">TWITTER</a>
+        <!-- Social Media with luxury styling -->
+        <div class="p-6 lg:p-8 text-center">
+            <div class="flex items-center justify-center mb-8">
+                <div class="w-8 h-px bg-white/30 mr-4"></div>
+                <p class="text-xs tracking-[0.3em] text-gray-400">FOLLOW US</p>
+                <div class="w-8 h-px bg-white/30 ml-4"></div>
             </div>
-            <p class="text-gray-400 text-xs tracking-wide font-sans">© 2025 Mohsen Ghohary</p>
+            <div class="flex justify-center space-x-8 mb-8">
+                <a href="#" class="text-white hover:text-gray-400 transition-all duration-300 text-sm tracking-[0.2em] transform hover:scale-110">INSTAGRAM</a>
+                <a href="#" class="text-white hover:text-gray-400 transition-all duration-300 text-sm tracking-[0.2em] transform hover:scale-110">FACEBOOK</a>
+                <a href="#" class="text-white hover:text-gray-400 transition-all duration-300 text-sm tracking-[0.2em] transform hover:scale-110">TWITTER</a>
+            </div>
+            <div class="w-16 h-px bg-white/20 mx-auto mb-4"></div>
+            <p class="text-gray-400 text-xs tracking-[0.2em] font-sans">© 2025 MOHSEN GHOHARY</p>
         </div>
     </div>
 </div>
