@@ -40,16 +40,14 @@
             muted
             loop
             playsinline
-            poster="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1920&q=80"
+            preload="auto"
         >
             <source src="assets/videos/hero-video-web.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <!-- Fallback image in case video doesn't load -->
-        <img 
-            src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1920&q=80"
-            alt="Hero"
-            class="absolute inset-0 w-full h-full object-cover"
+            <!-- Fallback for browsers that don't support video -->
+            <img 
+                src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1920&q=80"
+                alt="Hero"
+                class="absolute inset-0 w-full h-full object-cover"
             />
         </video>
         <div class="relative z-20 text-center text-white px-6 animate-fade-in">
@@ -311,6 +309,23 @@
 
     <!-- Load Header Script -->
     <script src="load-header.js"></script>
+    
+    <!-- Video loading script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.querySelector('video');
+            if (video) {
+                video.load();
+                // Try to play the video
+                const playPromise = video.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.log("Auto-play was prevented:", error);
+                    });
+                }
+            }
+        });
+    </script>
 
 </body>
 </html>
