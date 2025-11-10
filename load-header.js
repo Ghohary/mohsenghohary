@@ -20,6 +20,7 @@ function initializeHeader() {
     const searchBtn = document.getElementById('search-btn');
     const searchOverlay = document.getElementById('search-overlay');
     const closeSearchBtn = document.getElementById('close-search-btn');
+    const accountBtn = document.getElementById('account-btn');
     
     let isScrolled = false;
     
@@ -47,6 +48,13 @@ function initializeHeader() {
         searchElements.forEach(function(element) {
             element.classList.remove('border-white', 'bg-white');
             element.classList.add('border-gray-900', 'bg-gray-900');
+        });
+        
+        // Change account icon elements to black
+        const accountElements = document.querySelectorAll('.account-head, .account-body');
+        accountElements.forEach(function(element) {
+            element.classList.remove('border-white');
+            element.classList.add('border-gray-900');
         });
         
         // Change logo to black
@@ -88,6 +96,13 @@ function initializeHeader() {
         searchElements.forEach(function(element) {
             element.classList.remove('border-gray-900', 'bg-gray-900');
             element.classList.add('border-white', 'bg-white');
+        });
+        
+        // Change account icon elements to white
+        const accountElements = document.querySelectorAll('.account-head, .account-body');
+        accountElements.forEach(function(element) {
+            element.classList.remove('border-gray-900');
+            element.classList.add('border-white');
         });
         
         // Change logo to white
@@ -446,11 +461,36 @@ function initializeHeader() {
         });
     }
     
+    // Account button functionality
+    if (accountBtn) {
+        accountBtn.addEventListener('click', function() {
+            // Add click animation
+            accountBtn.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                accountBtn.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    accountBtn.style.transform = 'scale(1)';
+                    // Navigate to account page
+                    window.location.href = 'account.html';
+                }, 150);
+            }, 100);
+        });
+    }
+    
     // Close search when pressing Escape key
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && searchOverlay && !searchOverlay.classList.contains('hidden')) {
-            searchOverlay.classList.add('hidden');
-            document.body.style.overflow = 'auto';
+            const closeSearch = searchOverlay.querySelector('#close-search-btn');
+            if (closeSearch) {
+                closeSearch.click();
+            }
+        }
+        
+        if (e.key === 'Escape' && mobileMenu && !mobileMenu.classList.contains('hidden')) {
+            const closeMenu = mobileMenu.querySelector('#close-menu-btn');
+            if (closeMenu) {
+                closeMenu.click();
+            }
         }
     });
 }
