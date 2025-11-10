@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Mohsen Ghohary - Product Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .font-sans { font-family: 'Montserrat', sans-serif; }
+        
+        /* Custom animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .admin-card {
+            animation: fadeInUp 0.5s ease-out;
+        }
+        
+        /* Custom file upload styles */
+        .file-upload-area {
+            border: 2px dashed #d1d5db;
+            transition: all 0.3s ease;
+        }
+        
+        .file-upload-area:hover {
+            border-color: #000;
+            background-color: #f9fafb;
+        }
+        
+        .file-upload-area.dragover {
+            border-color: #000;
+            background-color: #f3f4f6;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Admin Header -->
+    <header class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-2xl font-light tracking-wide">ADMIN DASHBOARD</h1>
+                    <p class="text-sm text-gray-600 font-sans">Mohsen Ghohary Product Management</p>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button onclick="exportProducts()" class="bg-green-600 text-white px-4 py-2 rounded font-sans text-sm hover:bg-green-700 transition-colors">
+                        Export Data
+                    </button>
+                    <button onclick="backupProducts()" class="bg-blue-600 text-white px-4 py-2 rounded font-sans text-sm hover:bg-blue-700 transition-colors">
+                        Backup
+                    </button>
+                    <a href="index.html" class="bg-gray-600 text-white px-4 py-2 rounded font-sans text-sm hover:bg-gray-700 transition-colors">
+                        View Site
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-6 py-8">
+        <!-- Navigation Tabs -->
+        <div class="mb-8">
+            <div class="flex space-x-1 bg-white p-1 rounded-lg shadow-sm">
+                <button class="tab-button active px-4 py-2 rounded font-sans text-sm transition-colors" data-tab="products">
+                    Products
+                </button>
+                <button class="tab-button px-4 py-2 rounded font-sans text-sm transition-colors" data-tab="inventory">
+                    Inventory
+                </button>
+                <button class="tab-button px-4 py-2 rounded font-sans text-sm transition-colors" data-tab="orders">
+                    Orders
+                </button>
+                <button class="tab-button px-4 py-2 rounded font-sans text-sm transition-colors" data-tab="analytics">
+                    Analytics
+                </button>
+            </div>
+        </div>
+
+        <!-- Products Tab -->
+        <div id="products-tab" class="tab-content">
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Add Product Form -->
+                <div class="lg:col-span-1">
+                    <div class="admin-card bg-white rounded-lg shadow-sm p-6">
+                        <h2 class="text-xl font-light tracking-wide mb-6">Add New Product</h2>
+                        
+                        <form id="product-form" class="space-y-4">
+                            <!-- Product Name -->
+                            <div>
+                                <label class="block text-sm font-sans text-gray-700 mb-2">Product Name</label>
+                                <input type="text" id="product-name" class="w-full border border-gray-300 rounded px-3 py-2 font-sans text-sm focus:border-black focus:outline-none" placeholder="Elegant Evening Dress">
+                            </div>
+
+                            <!-- Category -->
+                            <div>
+                                <label class="block text-sm font-sans text-gray-700 mb-2">Category</label>
+                                <select id="product-category" class="w-full border border-gray-300 rounded px-3 py-2 font-sans text-sm focus:border-black focus:outline-none">
+                                    <option value="dresses">Dresses</option>
+                                    <option value="abayas">Abayas</option>
+                                    <option value="accessories">Accessories</option>
+                                    <option value="shoes">Shoes</option>
+                                    <option value="bags">Bags</option>
+                                    <option value="jewelry">Jewelry</option>
+                                </select>
+                            </div>
+
+                            <!-- Price -->
+                            <div>
+                                <label class="block text-sm font-sans text-gray-700 mb-2">Price ($)</label>
+                                <input type="number" id="product-price" step="0.01" class="w-full border border-gray-300 rounded px-3 py-2 font-sans text-sm focus:border-black focus:outline-none" placeholder="2850.00">
+                            </div>
+
+                            <!-- Description -->
+                            <div>
+                                <label class="block text-sm font-sans text-gray-700 mb-2">Description</label>
+                                <textarea id="product-description" rows="3" class="w-full border border-gray-300 rounded px-3 py-2 font-sans text-sm focus:border-black focus:outline-none resize-none" placeholder="Product description..."></textarea>
+                            </div>
+
+                            <!-- Colors -->
+                            <div>
+                                <label class="block text-sm font-sans text-gray-700 mb-2">Available Colors</label>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <label class="flex items-center space-x-2">
+                                        <input type="checkbox" value="black" class="color-checkbox">
+                                        <span class="text-sm font-sans">Black</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2">
+                                        <input type="checkbox" value="white" class="color-checkbox">
+                                        <span class="text-sm font-sans">White</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2">
+                                        <input type="checkbox" value="navy" class="color-checkbox">
+                                        <span class="text-sm font-sans">Navy</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2">
+                                        <input type="checkbox" value="burgundy" class="color-checkbox">
+                                        <span class="text-sm font-sans">Burgundy</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2">
+                                        <input type="checkbox" value="emerald" class="color-checkbox">
+                                        <span class="text-sm font-sans">Emerald</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2">
+                                        <input type="checkbox" value="gold" class="color-checkbox">
+                                        <span class="text-sm font-sans">Gold</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Sizes -->
+                            <div>
+                                <label class="block text-sm font-sans text-gray-700 mb-2">Available Sizes</label>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <label class="flex items-center space-x-2">
+                                        <input type="checkbox" value="XS" class="size-checkbox">
+                                        <span class="text-sm font-sans">XS</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2">
+                                        <input type="checkbox" value="S" class="size-checkbox">
+                                        <span class="text-sm font-sans">S</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2">
+                                        <input type="checkbox" value="M" class="size-checkbox">
+                                        <span class="text-sm font-sans">M</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2">
+                                        <input type="checkbox" value="L" class="size-checkbox">
+                                        <span class="text-sm font-sans">L</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2">
+                                        <input type="checkbox" value="XL" class="size-checkbox">
+                                        <span class="text-sm font-sans">XL</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2">
+                                        <input type="checkbox" value="XXL" class="size-checkbox">
+                                        <span class="text-sm font-sans">XXL</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Stock Quantity -->
+                            <div>
+                                <label class="block text-sm font-sans text-gray-700 mb-2">Stock Quantity</label>
+                                <input type="number" id="product-stock" min="0" class="w-full border border-gray-300 rounded px-3 py-2 font-sans text-sm focus:border-black focus:outline-none" placeholder="50">
+                            </div>
+
+                            <!-- Image Upload -->
+                            <div>
+                                <label class="block text-sm font-sans text-gray-700 mb-2">Product Images</label>
+                                <div class="file-upload-area border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer" onclick="document.getElementById('image-upload').click()">
+                                    <input type="file" id="image-upload" multiple accept="image/*" class="hidden" onchange="handleImageUpload(this)">
+                                    <div class="space-y-2">
+                                        <svg class="w-8 h-8 mx-auto text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                        </svg>
+                                        <p class="text-sm font-sans text-gray-600">Click to upload images</p>
+                                        <p class="text-xs font-sans text-gray-400">PNG, JPG up to 10MB each</p>
+                                    </div>
+                                </div>
+                                <div id="image-preview" class="grid grid-cols-2 gap-2 mt-4"></div>
+                            </div>
+
+                            <!-- Submit Buttons -->
+                            <div class="flex space-x-3 pt-4">
+                                <button type="submit" class="flex-1 bg-black text-white py-3 px-6 font-sans text-sm tracking-wide hover:bg-gray-800 transition-colors">
+                                    ADD PRODUCT
+                                </button>
+                                <button type="button" onclick="clearForm()" class="px-6 py-3 border border-gray-300 font-sans text-sm tracking-wide hover:bg-gray-50 transition-colors">
+                                    CLEAR
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Products List -->
+                <div class="lg:col-span-2">
+                    <div class="admin-card bg-white rounded-lg shadow-sm">
+                        <div class="p-6 border-b border-gray-200">
+                            <div class="flex items-center justify-between">
+                                <h2 class="text-xl font-light tracking-wide">Product List</h2>
+                                <div class="flex items-center space-x-4">
+                                    <input type="text" id="search-products" placeholder="Search products..." class="border border-gray-300 rounded px-3 py-2 font-sans text-sm focus:border-black focus:outline-none">
+                                    <select id="filter-category" class="border border-gray-300 rounded px-3 py-2 font-sans text-sm focus:border-black focus:outline-none">
+                                        <option value="">All Categories</option>
+                                        <option value="dresses">Dresses</option>
+                                        <option value="abayas">Abayas</option>
+                                        <option value="accessories">Accessories</option>
+                                        <option value="shoes">Shoes</option>
+                                        <option value="bags">Bags</option>
+                                        <option value="jewelry">Jewelry</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left text-xs font-sans tracking-wide text-gray-500 uppercase">Product</th>
+                                        <th class="px-6 py-3 text-left text-xs font-sans tracking-wide text-gray-500 uppercase">Category</th>
+                                        <th class="px-6 py-3 text-left text-xs font-sans tracking-wide text-gray-500 uppercase">Price</th>
+                                        <th class="px-6 py-3 text-left text-xs font-sans tracking-wide text-gray-500 uppercase">Stock</th>
+                                        <th class="px-6 py-3 text-left text-xs font-sans tracking-wide text-gray-500 uppercase">Status</th>
+                                        <th class="px-6 py-3 text-left text-xs font-sans tracking-wide text-gray-500 uppercase">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="products-table-body" class="divide-y divide-gray-200">
+                                    <!-- Products will be populated here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inventory Tab -->
+        <div id="inventory-tab" class="tab-content hidden">
+            <div class="admin-card bg-white rounded-lg shadow-sm p-6">
+                <h2 class="text-xl font-light tracking-wide mb-6">Inventory Management</h2>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h3 class="text-sm font-sans text-green-800 mb-2">Total Products</h3>
+                        <p class="text-2xl font-light" id="total-products">0</p>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h3 class="text-sm font-sans text-blue-800 mb-2">In Stock</h3>
+                        <p class="text-2xl font-light" id="in-stock">0</p>
+                    </div>
+                    <div class="bg-yellow-50 p-4 rounded-lg">
+                        <h3 class="text-sm font-sans text-yellow-800 mb-2">Low Stock</h3>
+                        <p class="text-2xl font-light" id="low-stock">0</p>
+                    </div>
+                    <div class="bg-red-50 p-4 rounded-lg">
+                        <h3 class="text-sm font-sans text-red-800 mb-2">Out of Stock</h3>
+                        <p class="text-2xl font-light" id="out-of-stock">0</p>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-sans tracking-wide text-gray-500 uppercase">Product</th>
+                                <th class="px-6 py-3 text-left text-xs font-sans tracking-wide text-gray-500 uppercase">SKU</th>
+                                <th class="px-6 py-3 text-left text-xs font-sans tracking-wide text-gray-500 uppercase">Current Stock</th>
+                                <th class="px-6 py-3 text-left text-xs font-sans tracking-wide text-gray-500 uppercase">Update Stock</th>
+                                <th class="px-6 py-3 text-left text-xs font-sans tracking-wide text-gray-500 uppercase">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventory-table-body" class="divide-y divide-gray-200">
+                            <!-- Inventory items will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Orders Tab -->
+        <div id="orders-tab" class="tab-content hidden">
+            <div class="admin-card bg-white rounded-lg shadow-sm p-6">
+                <h2 class="text-xl font-light tracking-wide mb-6">Orders Management</h2>
+                <p class="text-gray-600 font-sans">Order management system coming soon...</p>
+            </div>
+        </div>
+
+        <!-- Analytics Tab -->
+        <div id="analytics-tab" class="tab-content hidden">
+            <div class="admin-card bg-white rounded-lg shadow-sm p-6">
+                <h2 class="text-xl font-light tracking-wide mb-6">Analytics Dashboard</h2>
+                <p class="text-gray-600 font-sans">Analytics and reporting coming soon...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load Admin Script -->
+    <script src="admin.js"></script>
+</body>
+</html>
