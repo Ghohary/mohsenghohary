@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details | Mohsen Ghohary - Luxury Fashion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .font-sans { font-family: 'Montserrat', sans-serif; }
+        
+        /* Custom animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .product-image {
+            animation: zoomIn 0.8s ease-out;
+        }
+        
+        .product-details {
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+        
+        /* Custom thumb styles for range input */
+        input[type="range"]::-webkit-slider-thumb {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #000;
+            cursor: pointer;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+        
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #000;
+            cursor: pointer;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Product Details -->
+    <main class="pt-20 md:pt-24">
+        <!-- Breadcrumb -->
+        <div class="max-w-7xl mx-auto px-6 py-6">
+            <nav class="text-sm font-sans tracking-wide text-gray-500">
+                <a href="index.html" class="hover:text-black transition-colors duration-300">Home</a>
+                <span class="mx-2">/</span>
+                <a href="#" class="hover:text-black transition-colors duration-300" id="category-link">Dresses</a>
+                <span class="mx-2">/</span>
+                <span class="text-black" id="product-name">Elegant Evening Dress</span>
+            </nav>
+        </div>
+
+        <!-- Product Section -->
+        <section class="max-w-7xl mx-auto px-6 pb-20">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16">
+                <!-- Product Images -->
+                <div class="product-image">
+                    <!-- Main Image -->
+                    <div class="mb-6">
+                        <div class="relative aspect-[3/4] overflow-hidden bg-gray-50">
+                            <img 
+                                id="main-product-image"
+                                src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800&q=80"
+                                alt="Product Image"
+                                class="w-full h-full object-cover cursor-zoom-in transition-transform duration-500 hover:scale-105"
+                            />
+                            
+                            <!-- Image Navigation Arrows -->
+                            <button class="absolute left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white/80 hover:bg-white rounded-full flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100" id="prev-image">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                </svg>
+                            </button>
+                            <button class="absolute right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white/80 hover:bg-white rounded-full flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100" id="next-image">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Thumbnail Images -->
+                    <div class="grid grid-cols-4 gap-4" id="product-thumbnails">
+                        <button class="aspect-square overflow-hidden bg-gray-50 border-2 border-black" data-image="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800&q=80">
+                            <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=200&q=80" alt="Image 1" class="w-full h-full object-cover">
+                        </button>
+                        <button class="aspect-square overflow-hidden bg-gray-50 border-2 border-transparent hover:border-gray-300 transition-colors duration-300" data-image="https://images.unsplash.com/photo-1583292650898-7d22cd27ca6f?w=800&q=80">
+                            <img src="https://images.unsplash.com/photo-1583292650898-7d22cd27ca6f?w=200&q=80" alt="Image 2" class="w-full h-full object-cover">
+                        </button>
+                        <button class="aspect-square overflow-hidden bg-gray-50 border-2 border-transparent hover:border-gray-300 transition-colors duration-300" data-image="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=800&q=80">
+                            <img src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=200&q=80" alt="Image 3" class="w-full h-full object-cover">
+                        </button>
+                        <button class="aspect-square overflow-hidden bg-gray-50 border-2 border-transparent hover:border-gray-300 transition-colors duration-300" data-image="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&q=80">
+                            <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=200&q=80" alt="Image 4" class="w-full h-full object-cover">
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product Details -->
+                <div class="product-details space-y-8">
+                    <!-- Product Title and Price -->
+                    <div>
+                        <p class="text-xs font-sans tracking-[0.2em] text-gray-500 mb-2" id="product-category">DRESSES</p>
+                        <h1 class="text-3xl md:text-4xl font-light tracking-wide mb-4" id="product-title">Elegant Evening Dress</h1>
+                        <p class="text-2xl font-sans tracking-wide mb-6" id="product-price">$2,850</p>
+                        
+                        <!-- Product Rating -->
+                        <div class="flex items-center space-x-2 mb-6">
+                            <div class="flex text-yellow-400">
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                </svg>
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                </svg>
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                </svg>
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                </svg>
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                </svg>
+                            </div>
+                            <span class="text-sm font-sans text-gray-600">(24 reviews)</span>
+                        </div>
+                    </div>
+
+                    <!-- Product Description -->
+                    <div>
+                        <p class="text-gray-700 font-sans leading-relaxed" id="product-description">
+                            Crafted from the finest silk with hand-sewn details, this elegant evening dress embodies timeless sophistication. 
+                            The flowing silhouette and intricate beadwork make it perfect for special occasions where elegance is paramount.
+                        </p>
+                    </div>
+
+                    <!-- Size Selection -->
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-sm font-sans tracking-[0.1em]">SIZE</h3>
+                            <button class="text-xs font-sans tracking-[0.1em] text-gray-600 hover:text-black underline transition-colors duration-300">
+                                SIZE GUIDE
+                            </button>
+                        </div>
+                        <div class="grid grid-cols-4 gap-3" id="size-options">
+                            <button class="size-option border border-gray-300 py-3 px-4 font-sans text-sm tracking-wide hover:border-black transition-colors duration-300" data-size="XS">XS</button>
+                            <button class="size-option border border-gray-300 py-3 px-4 font-sans text-sm tracking-wide hover:border-black transition-colors duration-300" data-size="S">S</button>
+                            <button class="size-option border border-gray-300 py-3 px-4 font-sans text-sm tracking-wide hover:border-black transition-colors duration-300" data-size="M">M</button>
+                            <button class="size-option border border-gray-300 py-3 px-4 font-sans text-sm tracking-wide hover:border-black transition-colors duration-300" data-size="L">L</button>
+                        </div>
+                    </div>
+
+                    <!-- Color Selection -->
+                    <div>
+                        <h3 class="text-sm font-sans tracking-[0.1em] mb-4">COLOR</h3>
+                        <div class="flex space-x-3" id="color-options">
+                            <button class="color-option w-10 h-10 rounded-full border-2 border-gray-300 bg-black" data-color="black" data-color-name="Black"></button>
+                            <button class="color-option w-10 h-10 rounded-full border-2 border-gray-300 bg-blue-900" data-color="navy" data-color-name="Navy"></button>
+                            <button class="color-option w-10 h-10 rounded-full border-2 border-gray-300 bg-red-800" data-color="burgundy" data-color-name="Burgundy"></button>
+                            <button class="color-option w-10 h-10 rounded-full border-2 border-gray-300 bg-emerald-800" data-color="emerald" data-color-name="Emerald"></button>
+                        </div>
+                        <p class="text-sm font-sans text-gray-600 mt-2" id="selected-color">Selected: Black</p>
+                    </div>
+
+                    <!-- Quantity -->
+                    <div>
+                        <h3 class="text-sm font-sans tracking-[0.1em] mb-4">QUANTITY</h3>
+                        <div class="flex items-center space-x-4">
+                            <button id="quantity-decrease" class="w-10 h-10 border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-colors duration-300">
+                                <span class="text-lg">-</span>
+                            </button>
+                            <span id="quantity-display" class="font-sans text-lg min-w-[2rem] text-center">1</span>
+                            <button id="quantity-increase" class="w-10 h-10 border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-colors duration-300">
+                                <span class="text-lg">+</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Add to Cart Section -->
+                    <div class="space-y-4 pt-6 border-t border-gray-200">
+                        <button id="add-to-cart" class="w-full bg-black text-white py-4 px-8 font-sans text-sm tracking-[0.2em] hover:bg-gray-800 transition-colors duration-300">
+                            ADD TO CART
+                        </button>
+                        <button class="w-full border border-black text-black py-4 px-8 font-sans text-sm tracking-[0.2em] hover:bg-black hover:text-white transition-all duration-300">
+                            ADD TO WISHLIST
+                        </button>
+                    </div>
+
+                    <!-- Product Details Accordion -->
+                    <div class="space-y-6 pt-8 border-t border-gray-200">
+                        <div class="product-detail-section">
+                            <button class="flex justify-between items-center w-full text-left py-4 border-b border-gray-200 hover:border-gray-400 transition-colors duration-300" data-target="details">
+                                <span class="font-sans text-sm tracking-[0.1em]">PRODUCT DETAILS</span>
+                                <svg class="w-4 h-4 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div id="details" class="hidden py-4 text-sm font-sans text-gray-600 leading-relaxed">
+                                <ul class="space-y-2">
+                                    <li>• 100% Silk with hand-sewn beadwork</li>
+                                    <li>• Invisible zipper closure</li>
+                                    <li>• Fully lined with premium cotton</li>
+                                    <li>• Made in Italy by master craftsmen</li>
+                                    <li>• Dry clean only</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="product-detail-section">
+                            <button class="flex justify-between items-center w-full text-left py-4 border-b border-gray-200 hover:border-gray-400 transition-colors duration-300" data-target="shipping">
+                                <span class="font-sans text-sm tracking-[0.1em]">SHIPPING & RETURNS</span>
+                                <svg class="w-4 h-4 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div id="shipping" class="hidden py-4 text-sm font-sans text-gray-600 leading-relaxed">
+                                <ul class="space-y-2">
+                                    <li>• Free shipping on orders over $1,000</li>
+                                    <li>• Express delivery available (2-3 business days)</li>
+                                    <li>• 30-day return policy</li>
+                                    <li>• Free returns and exchanges</li>
+                                    <li>• Signature required on delivery</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="product-detail-section">
+                            <button class="flex justify-between items-center w-full text-left py-4 border-b border-gray-200 hover:border-gray-400 transition-colors duration-300" data-target="care">
+                                <span class="font-sans text-sm tracking-[0.1em]">CARE INSTRUCTIONS</span>
+                                <svg class="w-4 h-4 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div id="care" class="hidden py-4 text-sm font-sans text-gray-600 leading-relaxed">
+                                <ul class="space-y-2">
+                                    <li>• Professional dry clean only</li>
+                                    <li>• Store on padded hangers</li>
+                                    <li>• Keep away from direct sunlight</li>
+                                    <li>• Steam to remove wrinkles</li>
+                                    <li>• Professional storage available</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Products -->
+        <section class="py-20 border-t border-gray-200">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="text-2xl md:text-3xl font-light text-center mb-12 tracking-wide">You May Also Like</h2>
+                <div class="grid md:grid-cols-4 gap-8">
+                    <!-- Related Product 1 -->
+                    <div class="group cursor-pointer">
+                        <div class="relative overflow-hidden mb-4 aspect-[3/4]">
+                            <img 
+                                src="https://images.unsplash.com/photo-1566479179817-0ddbfe0b7d65?w=600&q=80"
+                                alt="Related Product"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            />
+                        </div>
+                        <p class="text-xs font-sans tracking-widest text-gray-500 mb-1">DRESSES</p>
+                        <h3 class="text-lg font-light tracking-wide mb-2">Cocktail Dress</h3>
+                        <p class="font-sans text-sm">$1,850</p>
+                    </div>
+                    
+                    <!-- Related Product 2 -->
+                    <div class="group cursor-pointer">
+                        <div class="relative overflow-hidden mb-4 aspect-[3/4]">
+                            <img 
+                                src="https://images.unsplash.com/photo-1558769132-cb1aea3c8565?w=600&q=80"
+                                alt="Related Product"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            />
+                        </div>
+                        <p class="text-xs font-sans tracking-widest text-gray-500 mb-1">DRESSES</p>
+                        <h3 class="text-lg font-light tracking-wide mb-2">Maxi Dress</h3>
+                        <p class="font-sans text-sm">$2,200</p>
+                    </div>
+                    
+                    <!-- Related Product 3 -->
+                    <div class="group cursor-pointer">
+                        <div class="relative overflow-hidden mb-4 aspect-[3/4]">
+                            <img 
+                                src="https://images.unsplash.com/photo-1542295669297-4d352b042bca?w=600&q=80"
+                                alt="Related Product"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            />
+                        </div>
+                        <p class="text-xs font-sans tracking-widest text-gray-500 mb-1">ACCESSORIES</p>
+                        <h3 class="text-lg font-light tracking-wide mb-2">Silk Scarf</h3>
+                        <p class="font-sans text-sm">$450</p>
+                    </div>
+                    
+                    <!-- Related Product 4 -->
+                    <div class="group cursor-pointer">
+                        <div class="relative overflow-hidden mb-4 aspect-[3/4]">
+                            <img 
+                                src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&q=80"
+                                alt="Related Product"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            />
+                        </div>
+                        <p class="text-xs font-sans tracking-widest text-gray-500 mb-1">BAGS</p>
+                        <h3 class="text-lg font-light tracking-wide mb-2">Evening Clutch</h3>
+                        <p class="font-sans text-sm">$1,200</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Load Scripts -->
+    <script src="load-header.js"></script>
+    <script src="load-footer.js"></script>
+    <script src="product.js"></script>
+</body>
+</html>
