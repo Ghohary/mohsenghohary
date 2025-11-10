@@ -42,6 +42,13 @@ function initializeHeader() {
             line.classList.add('text-gray-900');
         });
         
+        // Change search icon elements to black
+        const searchElements = document.querySelectorAll('.search-circle, .search-handle');
+        searchElements.forEach(function(element) {
+            element.classList.remove('border-white', 'bg-white');
+            element.classList.add('border-gray-900', 'bg-gray-900');
+        });
+        
         // Change logo to black
         const logo = mainNav.querySelector('a[href="index.html"]');
         if (logo) {
@@ -74,6 +81,13 @@ function initializeHeader() {
         hamburgerLines.forEach(function(line) {
             line.classList.remove('text-gray-900');
             line.classList.add('text-white');
+        });
+        
+        // Change search icon elements to white
+        const searchElements = document.querySelectorAll('.search-circle, .search-handle');
+        searchElements.forEach(function(element) {
+            element.classList.remove('border-gray-900', 'bg-gray-900');
+            element.classList.add('border-white', 'bg-white');
         });
         
         // Change logo to white
@@ -248,19 +262,187 @@ function initializeHeader() {
         });
     }
     
-    // Search functionality
+    // Enhanced search functionality with luxury animations
     if (searchBtn && searchOverlay) {
+        let isSearchOpen = false;
+        
         searchBtn.addEventListener('click', function() {
-            searchOverlay.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
+            if (!isSearchOpen) {
+                // Open search with luxury animations
+                searchOverlay.classList.remove('hidden');
+                
+                // Fade in overlay
+                setTimeout(() => {
+                    searchOverlay.classList.remove('opacity-0');
+                    searchOverlay.classList.add('opacity-100');
+                }, 10);
+                
+                // Animate search sections with stagger
+                const brandSection = searchOverlay.querySelector('.search-brand-section');
+                const inputSection = searchOverlay.querySelector('.search-input-section');
+                const categoriesSection = searchOverlay.querySelector('.search-categories-section');
+                
+                // Brand section animation
+                setTimeout(() => {
+                    if (brandSection) {
+                        brandSection.style.opacity = '1';
+                        brandSection.style.transform = 'translateY(0)';
+                        brandSection.style.transition = 'all 0.6s ease-out';
+                    }
+                }, 200);
+                
+                // Input section animation
+                setTimeout(() => {
+                    if (inputSection) {
+                        inputSection.style.opacity = '1';
+                        inputSection.style.transform = 'translateY(0)';
+                        inputSection.style.transition = 'all 0.6s ease-out';
+                    }
+                }, 400);
+                
+                // Categories section animation
+                setTimeout(() => {
+                    if (categoriesSection) {
+                        categoriesSection.style.opacity = '1';
+                        categoriesSection.style.transform = 'translateY(0)';
+                        categoriesSection.style.transition = 'all 0.6s ease-out';
+                    }
+                }, 600);
+                
+                // Animate category buttons individually
+                const categoryBtns = searchOverlay.querySelectorAll('.search-category-btn');
+                categoryBtns.forEach((btn, index) => {
+                    btn.style.opacity = '0';
+                    btn.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        btn.style.opacity = '1';
+                        btn.style.transform = 'translateY(0)';
+                        btn.style.transition = 'all 0.4s ease-out';
+                    }, 800 + (index * 50));
+                });
+                
+                // Animate trending searches
+                const trendingSearches = searchOverlay.querySelectorAll('.trending-search');
+                trendingSearches.forEach((search, index) => {
+                    search.style.opacity = '0';
+                    search.style.transform = 'scale(0.8)';
+                    setTimeout(() => {
+                        search.style.opacity = '1';
+                        search.style.transform = 'scale(1)';
+                        search.style.transition = 'all 0.3s ease-out';
+                    }, 1100 + (index * 100));
+                });
+                
+                document.body.style.overflow = 'hidden';
+                isSearchOpen = true;
+                
+                // Focus on search input after animation
+                setTimeout(() => {
+                    const searchInput = document.getElementById('search-input');
+                    if (searchInput) searchInput.focus();
+                }, 800);
+            }
         });
-    }
-    
-    // Close search
-    if (closeSearchBtn && searchOverlay) {
-        closeSearchBtn.addEventListener('click', function() {
-            searchOverlay.classList.add('hidden');
-            document.body.style.overflow = 'auto';
+        
+        // Function to close search with animations
+        function closeSearch() {
+            if (isSearchOpen) {
+                // Fade out overlay
+                searchOverlay.classList.remove('opacity-100');
+                searchOverlay.classList.add('opacity-0');
+                
+                // Reset all sections
+                const sections = searchOverlay.querySelectorAll('.search-brand-section, .search-input-section, .search-categories-section');
+                sections.forEach((section) => {
+                    section.style.opacity = '0';
+                    section.style.transform = 'translateY(-20px)';
+                    section.style.transition = 'all 0.3s ease-in';
+                });
+                
+                // Reset category buttons and trending searches
+                const animatedElements = searchOverlay.querySelectorAll('.search-category-btn, .trending-search');
+                animatedElements.forEach((element) => {
+                    element.style.opacity = '0';
+                    element.style.transform = 'translateY(-10px) scale(0.9)';
+                    element.style.transition = 'all 0.2s ease-in';
+                });
+                
+                // Hide overlay after animation
+                setTimeout(() => {
+                    searchOverlay.classList.add('hidden');
+                    
+                    // Reset all styles for next open
+                    sections.forEach((section) => {
+                        section.style.opacity = '';
+                        section.style.transform = '';
+                        section.style.transition = '';
+                    });
+                    
+                    animatedElements.forEach((element) => {
+                        element.style.opacity = '';
+                        element.style.transform = '';
+                        element.style.transition = '';
+                    });
+                }, 300);
+                
+                document.body.style.overflow = 'auto';
+                isSearchOpen = false;
+            }
+        }
+        
+        // Close search button
+        if (closeSearchBtn) {
+            closeSearchBtn.addEventListener('click', closeSearch);
+        }
+        
+        // Add functionality to category buttons
+        const categoryButtons = searchOverlay.querySelectorAll('.search-category-btn');
+        categoryButtons.forEach((btn) => {
+            btn.addEventListener('click', function() {
+                // Add click effect
+                btn.style.transform = 'scale(0.95) translateY(-2px)';
+                setTimeout(() => {
+                    btn.style.transform = 'scale(1.05) translateY(-2px)';
+                    // Here you could navigate to the category page
+                    // For now, just close the search
+                    setTimeout(closeSearch, 200);
+                }, 150);
+            });
+        });
+        
+        // Add functionality to trending searches
+        const trendingSearches = searchOverlay.querySelectorAll('.trending-search');
+        trendingSearches.forEach((search) => {
+            search.addEventListener('click', function() {
+                const searchInput = document.getElementById('search-input');
+                if (searchInput) {
+                    searchInput.value = search.textContent;
+                    searchInput.focus();
+                }
+            });
+        });
+        
+        // Enhanced search input functionality
+        const searchInput = document.getElementById('search-input');
+        if (searchInput) {
+            searchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    // Add search functionality here
+                    const query = searchInput.value.trim();
+                    if (query) {
+                        // For now, just show an alert - replace with actual search
+                        console.log('Searching for:', query);
+                        closeSearch();
+                    }
+                }
+            });
+        }
+        
+        // Close search when clicking outside
+        searchOverlay.addEventListener('click', function(e) {
+            if (e.target === searchOverlay) {
+                closeSearch();
+            }
         });
     }
     
