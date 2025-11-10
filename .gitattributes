@@ -1,3 +1,4 @@
 *.mp4 filter=lfs diff=lfs merge=lfs -text
 assets/videos/hero-small.mp4 -filter -diff -merge -text
 assets/videos/test-video.mp4 -filter -diff -merge -text
+assets/videos/hero-final.mp4 -filter -diff -merge -text
