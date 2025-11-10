@@ -859,4 +859,3 @@ function showCartNotification(message, type = 'success') {
 window.addToCart = addToCart;
 window.removeFromCart = removeFromCart;
 window.updateCartQuantity = updateCartQuantity;
-}
