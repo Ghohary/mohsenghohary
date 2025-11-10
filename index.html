@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohsen Ghohary - Luxury Fashion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500&family=Montserrat:wght@300;400;500&display=swap');
+        
+        body {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .font-sans {
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 1.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900">
+    
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/30 to-black/50 z-10"></div>
+        <img 
+            src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1920&q=80"
+            alt="Hero"
+            class="absolute inset-0 w-full h-full object-cover"
+        />
+        <div class="relative z-20 text-center text-white px-6 animate-fade-in">
+            <h1 class="text-5xl md:text-7xl font-light tracking-widest mb-6">
+                Spring/Summer 2026
+            </h1>
+            <p class="text-xl md:text-2xl font-light mb-8 tracking-wide">
+                Where elegance meets innovation
+            </p>
+            <button class="bg-white text-black px-8 py-3 font-sans text-sm tracking-widest hover:bg-gray-100 transition-all duration-300">
+                EXPLORE COLLECTION →
+            </button>
+        </div>
+    </section>
+
+    <!-- Featured Collections -->
+    <section id="collections" class="py-20 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-light text-center mb-16 tracking-wide">
+                Ghohary Collections
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Collection 1 -->
+                <div class="group cursor-pointer overflow-hidden">
+                    <div class="relative h-96 overflow-hidden mb-4">
+                        <img 
+                            src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1200&q=80"
+                            alt="Spring/Summer 2025"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-500"></div>
+                    </div>
+                    <h3 class="text-2xl font-light mb-2 tracking-wide">Spring/Summer 2025</h3>
+                    <p class="text-gray-600 font-sans text-sm tracking-wide mb-2">Ethereal Elegance</p>
+                    <a href="#" class="text-sm font-sans tracking-widest">Discover the new collection →</a>
+                </div>
+
+                <!-- Collection 2 -->
+                <div class="group cursor-pointer overflow-hidden">
+                    <div class="relative h-96 overflow-hidden mb-4">
+                        <img 
+                            src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&q=80"
+                            alt="Fall/Winter 2024"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-500"></div>
+                    </div>
+                    <h3 class="text-2xl font-light mb-2 tracking-wide">Fall/Winter 2024</h3>
+                    <p class="text-gray-600 font-sans text-sm tracking-wide mb-2">Modern Heritage</p>
+                    <a href="#" class="text-sm font-sans tracking-widest">Timeless sophistication →</a>
+                </div>
+
+                <!-- Collection 3 -->
+                <div class="group cursor-pointer overflow-hidden">
+                    <div class="relative h-96 overflow-hidden mb-4">
+                        <img 
+                            src="https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=1200&q=80"
+                            alt="Haute Couture"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-500"></div>
+                    </div>
+                    <h3 class="text-2xl font-light mb-2 tracking-wide">Haute Couture</h3>
+                    <p class="text-gray-600 font-sans text-sm tracking-wide mb-2">Art of Fashion</p>
+                    <a href="#" class="text-sm font-sans tracking-widest">Exclusive masterpieces →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Grid -->
+    <section id="products" class="py-20 px-6 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-light text-center mb-4 tracking-wide">
+                Summer Collection 2026
+            </h2>
+            <p class="text-center text-gray-600 font-sans mb-16 tracking-wide">
+                Curated selection of timeless pieces
+            </p>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Product 1 -->
+                <div class="group cursor-pointer">
+                    <div class="relative overflow-hidden mb-4 bg-white">
+                        <img 
+                            src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600&q=80"
+                            alt="Silk Evening Gown"
+                            class="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                    </div>
+                    <p class="text-xs font-sans tracking-widest text-gray-500 mb-1">DRESSES</p>
+                    <h3 class="text-lg font-light mb-2 tracking-wide">Silk Evening Gown</h3>
+                    <p class="font-sans text-sm tracking-wide">$4,500</p>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="group cursor-pointer">
+                    <div class="relative overflow-hidden mb-4 bg-white">
+                        <img 
+                            src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600&q=80"
+                            alt="Leather Handbag"
+                            class="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                    </div>
+                    <p class="text-xs font-sans tracking-widest text-gray-500 mb-1">ACCESSORIES</p>
+                    <h3 class="text-lg font-light mb-2 tracking-wide">Leather Handbag</h3>
+                    <p class="font-sans text-sm tracking-wide">$3,200</p>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="group cursor-pointer">
+                    <div class="relative overflow-hidden mb-4 bg-white">
+                        <img 
+                            src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&q=80"
+                            alt="Cashmere Coat"
+                            class="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                    </div>
+                    <p class="text-xs font-sans tracking-widest text-gray-500 mb-1">OUTERWEAR</p>
+                    <h3 class="text-lg font-light mb-2 tracking-wide">Cashmere Coat</h3>
+                    <p class="font-sans text-sm tracking-wide">$5,800</p>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="group cursor-pointer">
+                    <div class="relative overflow-hidden mb-4 bg-white">
+                        <img 
+                            src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=600&q=80"
+                            alt="Designer Heels"
+                            class="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                    </div>
+                    <p class="text-xs font-sans tracking-widest text-gray-500 mb-1">SHOES</p>
+                    <h3 class="text-lg font-light mb-2 tracking-wide">Designer Heels</h3>
+                    <p class="font-sans text-sm tracking-wide">$1,250</p>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="group cursor-pointer">
+                    <div class="relative overflow-hidden mb-4 bg-white">
+                        <img 
+                            src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=600&q=80"
+                            alt="Tailored Blazer"
+                            class="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                    </div>
+                    <p class="text-xs font-sans tracking-widest text-gray-500 mb-1">CLOTHING</p>
+                    <h3 class="text-lg font-light mb-2 tracking-wide">Tailored Blazer</h3>
+                    <p class="font-sans text-sm tracking-wide">$2,900</p>
+                </div>
+
+                <!-- Product 6 -->
+                <div class="group cursor-pointer">
+                    <div class="relative overflow-hidden mb-4 bg-white">
+                        <img 
+                            src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&q=80"
+                            alt="Pearl Necklace"
+                            class="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                    </div>
+                    <p class="text-xs font-sans tracking-widest text-gray-500 mb-1">JEWELRY</p>
+                    <h3 class="text-lg font-light mb-2 tracking-wide">Pearl Necklace</h3>
+                    <p class="font-sans text-sm tracking-wide">$1,800</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-6">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-4xl md:text-5xl font-light mb-6 tracking-wide">
+                    The Art of Excellence
+                </h2>
+                <p class="text-gray-600 font-sans leading-relaxed mb-6">
+                    For over seven decades, we have been crafting timeless pieces that embody the perfect balance between tradition and innovation. Each creation tells a story of uncompromising quality and artistic vision.
+                </p>
+                <p class="text-gray-600 font-sans leading-relaxed mb-8">
+                    Our atelier combines centuries-old techniques with contemporary design, resulting in pieces that transcend trends and become cherished heirlooms.
+                </p>
+                <button class="border border-black px-8 py-3 font-sans text-sm tracking-widest hover:bg-black hover:text-white transition-all duration-300">
+                    DISCOVER OUR HERITAGE
+                </button>
+            </div>
+            <div class="relative h-96 md:h-full">
+                <img 
+                    src="https://images.unsplash.com/photo-1558769132-cb1aea3c8565?w=800&q=80"
+                    alt="Atelier"
+                    class="w-full h-full object-cover"
+                />
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section id="contact" class="py-20 px-6 bg-black text-white">
+        <div class="max-w-2xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-light mb-4 tracking-wide">
+                Join Our World
+            </h2>
+            <p class="font-sans text-gray-300 mb-8 tracking-wide">
+                Be the first to discover new collections and exclusive events
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 max-w-lg mx-auto">
+                <input 
+                    type="email"
+                    placeholder="Enter your email"
+                    class="flex-1 px-6 py-3 bg-transparent border border-white font-sans text-sm tracking-wide focus:outline-none focus:border-gray-400"
+                />
+                <button class="bg-white text-black px-8 py-3 font-sans text-sm tracking-widest hover:bg-gray-200 transition-colors">
+                    SUBSCRIBE
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <h3 class="text-xl font-light mb-4 tracking-widest">MOHSEN GHOHARY</h3>
+                    <p class="font-sans text-sm text-gray-400 leading-relaxed">
+                        Crafting timeless luxury since 1947
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-sans text-sm tracking-widest mb-4">COLLECTIONS</h4>
+                    <ul class="space-y-2 font-sans text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Haute Couture</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Ready-to-Wear</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Accessories</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Jewelry</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-sans text-sm tracking-widest mb-4">COMPANY</h4>
+                    <ul class="space-y-2 font-sans text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Stores</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-sans text-sm tracking-widest mb-4">FOLLOW US</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="hover:text-gray-400 transition-colors">Instagram</a>
+                        <a href="#" class="hover:text-gray-400 transition-colors">Facebook</a>
+                        <a href="#" class="hover:text-gray-400 transition-colors">Twitter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center font-sans text-sm text-gray-400">
+                <p>&copy; 2025 Mohsen Ghohary. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Load Header Script -->
+    <script src="load-header.js"></script>
+
+</body>
+</html>
+```
+
+---
+
+## **Your file structure should be:**
+```
+luxury-fashion-site/
+├── index.html
+├── header.html
+└── load-header.js
