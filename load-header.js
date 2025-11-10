@@ -35,6 +35,13 @@ function initializeHeader() {
             btn.classList.add('text-gray-900');
         });
         
+        // Change hamburger lines to black
+        const hamburgerLines = document.querySelectorAll('.hamburger-line');
+        hamburgerLines.forEach(function(line) {
+            line.classList.remove('text-white');
+            line.classList.add('text-gray-900');
+        });
+        
         // Change logo to black
         const logo = mainNav.querySelector('a[href="index.html"]');
         if (logo) {
@@ -60,6 +67,13 @@ function initializeHeader() {
         allButtons.forEach(function(btn) {
             btn.classList.remove('text-gray-900');
             btn.classList.add('text-white');
+        });
+        
+        // Change hamburger lines to white
+        const hamburgerLines = document.querySelectorAll('.hamburger-line');
+        hamburgerLines.forEach(function(line) {
+            line.classList.remove('text-gray-900');
+            line.classList.add('text-white');
         });
         
         // Change logo to white
@@ -102,36 +116,134 @@ function initializeHeader() {
         });
     }
     
-    // Open hamburger menu
+    // Enhanced hamburger menu functionality
     if (hamburgerBtn && mobileMenu) {
+        // Get hamburger lines for animation
+        const hamburgerLines = hamburgerBtn.querySelectorAll('.hamburger-line');
+        let isMenuOpen = false;
+        
         hamburgerBtn.addEventListener('click', function() {
-            mobileMenu.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
+            if (!isMenuOpen) {
+                // Open menu with luxury animations
+                mobileMenu.classList.remove('hidden');
+                
+                // Animate hamburger to X
+                if (hamburgerLines.length >= 3) {
+                    hamburgerLines[0].style.transform = 'translateY(8px) rotate(45deg)';
+                    hamburgerLines[1].style.opacity = '0';
+                    hamburgerLines[1].style.transform = 'translateX(-10px)';
+                    hamburgerLines[2].style.transform = 'translateY(-8px) rotate(-45deg)';
+                }
+                
+                // Fade in menu overlay
+                setTimeout(() => {
+                    mobileMenu.classList.remove('opacity-0');
+                    mobileMenu.classList.add('opacity-100');
+                }, 10);
+                
+                // Stagger animate menu items
+                const menuItems = mobileMenu.querySelectorAll('.menu-item');
+                menuItems.forEach((item, index) => {
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateY(30px)';
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                        item.style.transition = 'all 0.6s ease-out';
+                    }, 200 + (index * 100));
+                });
+                
+                // Animate social links
+                const socialLinks = mobileMenu.querySelectorAll('.social-link');
+                socialLinks.forEach((link, index) => {
+                    link.style.opacity = '0';
+                    link.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        link.style.opacity = '1';
+                        link.style.transform = 'translateY(0)';
+                        link.style.transition = 'all 0.4s ease-out';
+                    }, 600 + (index * 50));
+                });
+                
+                document.body.style.overflow = 'hidden';
+                isMenuOpen = true;
+            }
         });
-    }
-    
-    // Close hamburger menu
-    if (closeMenuBtn && mobileMenu) {
-        closeMenuBtn.addEventListener('click', function() {
-            mobileMenu.classList.add('hidden');
-            document.body.style.overflow = 'auto';
+        
+        // Function to close menu with animations
+        function closeMenu() {
+            if (isMenuOpen) {
+                // Animate hamburger back to normal
+                if (hamburgerLines.length >= 3) {
+                    hamburgerLines[0].style.transform = 'translateY(0) rotate(0)';
+                    hamburgerLines[1].style.opacity = '1';
+                    hamburgerLines[1].style.transform = 'translateX(0)';
+                    hamburgerLines[2].style.transform = 'translateY(0) rotate(0)';
+                }
+                
+                // Fade out menu
+                mobileMenu.classList.remove('opacity-100');
+                mobileMenu.classList.add('opacity-0');
+                
+                // Reset menu items
+                const menuItems = mobileMenu.querySelectorAll('.menu-item');
+                menuItems.forEach((item) => {
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateY(-20px)';
+                    item.style.transition = 'all 0.3s ease-in';
+                });
+                
+                // Hide menu after animation
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                    // Reset styles for next open
+                    menuItems.forEach((item) => {
+                        item.style.opacity = '';
+                        item.style.transform = '';
+                        item.style.transition = '';
+                    });
+                    const socialLinks = mobileMenu.querySelectorAll('.social-link');
+                    socialLinks.forEach((link) => {
+                        link.style.opacity = '';
+                        link.style.transform = '';
+                        link.style.transition = '';
+                    });
+                }, 300);
+                
+                document.body.style.overflow = 'auto';
+                isMenuOpen = false;
+            }
+        }
+        
+        // Close menu button
+        if (closeMenuBtn) {
+            closeMenuBtn.addEventListener('click', closeMenu);
+        }
+        
+        // Close menu when clicking on menu links with smooth animation
+        const menuItems = mobileMenu.querySelectorAll('.menu-item');
+        menuItems.forEach(function(link) {
+            link.addEventListener('click', function() {
+                // Add click effect
+                link.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    link.style.transform = 'scale(1)';
+                    closeMenu();
+                }, 150);
+            });
         });
-    }
-    
-    // Close menu when clicking on a link
-    menuLinks.forEach(function(link) {
-        link.addEventListener('click', function() {
-            mobileMenu.classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        });
-    });
-    
-    // Close menu when clicking outside
-    if (mobileMenu) {
+        
+        // Close menu when clicking outside with fade effect
         mobileMenu.addEventListener('click', function(e) {
             if (e.target === mobileMenu) {
-                mobileMenu.classList.add('hidden');
-                document.body.style.overflow = 'auto';
+                closeMenu();
+            }
+        });
+        
+        // Enhanced escape key functionality
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && isMenuOpen) {
+                closeMenu();
             }
         });
     }
