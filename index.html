@@ -428,7 +428,28 @@
         </div>
     </section>
 
-    <!-- Hero Section 2 -->
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Load Scripts -->
+    <script src="load-header.js"></script>
+    <script src="load-footer.js"></script>
+    
+    <!-- Video loading script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.querySelector('video');
+            if (video) {
+                video.load();
+                // Try to play the video
+                video.play().catch(function(error) {
+                    console.log("Video autoplay failed:", error);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
     <section class="relative h-screen flex items-end overflow-hidden hero-video-container">
         <!-- Animated Decorative Elements -->
         <div class="absolute inset-0 z-10 pointer-events-none opacity-20">
