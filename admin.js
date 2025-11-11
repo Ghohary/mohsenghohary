@@ -371,7 +371,7 @@ function loadProducts() {
                 description: 'Crafted from the finest silk with hand-sewn details, this elegant evening dress embodies timeless sophistication.',
                 details: '• Material: 100% Silk\n• Made in Italy\n• Dry clean only\n• Hand-sewn beadwork',
                 images: ['https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800&q=80'],
-                sizes: ['XS', 'S', 'M', 'L'],
+                sizes: ['36', '38', '40', '42', '44'],
                 colors: [
                     {color: 'black', name: 'Black'},
                     {color: 'navy', name: 'Navy'},
