@@ -12,7 +12,7 @@
             <!-- Right side: Search → Cart → Menu -->
             <div class="flex items-center space-x-3 md:space-x-4 lg:space-x-5">
                 <!-- Search icon FIRST -->
-                <button id="search-btn" class="w-10 h-10 flex items-center justify-center text-amber-900 hover:text-amber-800 transition-all duration-300">
+                <button id="search-btn" class="w-10 h-10 flex items-center justify-center" style="color: #3c2a21;" onmouseover="this.style.color='#c3a977'" onmouseout="this.style.color='#3c2a21'">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                         <circle cx="11" cy="11" r="8"></circle>
                         <path d="m21 21-4.35-4.35"></path>
@@ -20,21 +20,21 @@
                 </button>
                 
                 <!-- Left divider -->
-                <div class="w-px h-4 bg-amber-900 opacity-30"></div>
+                <div class="w-px h-4" style="background-color: #3c2a21; opacity: 0.3;"></div>
                 
                 <!-- Shopping cart icon SECOND -->
-                <button id="cart-btn" class="w-10 h-10 flex items-center justify-center text-amber-900 hover:text-amber-800 transition-colors duration-300 relative">
+                <button id="cart-btn" class="w-10 h-10 flex items-center justify-center relative" style="color: #3c2a21;" onmouseover="this.style.color='#c3a977'" onmouseout="this.style.color='#3c2a21'">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
                     </svg>
-                    <span id="cart-count" class="absolute -top-1 -right-1 bg-amber-900 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center font-medium hidden">0</span>
+                    <span id="cart-count" class="absolute -top-1 -right-1" style="background-color: #3c2a21; color: #fff;" class="text-xs w-4 h-4 rounded-full flex items-center justify-center font-medium hidden">0</span>
                 </button>
                 
                 <!-- Right divider -->
-                <div class="w-px h-4 bg-amber-900 opacity-30"></div>
+                <div class="w-px h-4" style="background-color: #3c2a21; opacity: 0.3;"></div>
                 
                 <!-- Menu button FINALLY all the way to the right -->
-                <button id="hamburger-btn" class="w-10 h-10 flex items-center justify-center text-amber-900 hover:text-amber-800 transition-colors duration-300 relative">
+                <button id="hamburger-btn" class="w-10 h-10 flex items-center justify-center relative" style="color: #3c2a21;" onmouseover="this.style.color='#c3a977'" onmouseout="this.style.color='#3c2a21'">
                     <svg id="hamburger-icon" class="w-5 h-5 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
