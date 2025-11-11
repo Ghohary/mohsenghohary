@@ -23,32 +23,16 @@ fetch('header.html')
     .catch(error => console.error('Error loading header:', error));
 
 function initializeHeader() {
+    // Get elements for Graff-style header
     const hamburgerBtn = document.getElementById('hamburger-btn');
-    const closeMenuBtn = document.getElementById('close-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
-    const menuLinks = document.querySelectorAll('.menu-link');
-    const mainNav = document.getElementById('main-nav');
-    const searchBtn = document.getElementById('search-btn');
-    const searchOverlay = document.getElementById('search-overlay');
-    const closeSearchBtn = document.getElementById('close-search-btn');
-    const accountBtn = document.getElementById('account-btn');
+    const closeMenuBtn = document.getElementById('close-menu-btn');
     const cartBtn = document.getElementById('cart-btn');
     const cartOverlay = document.getElementById('cart-overlay');
-    const cartBackdrop = document.getElementById('cart-backdrop');
     const closeCartBtn = document.getElementById('close-cart-btn');
+    const wishlistBtn = document.getElementById('wishlist-btn');
     
-    let isScrolled = false;
-    
-    // Function to change header to white/black
-    function changeToWhite() {
-        mainNav.classList.add('bg-white', 'shadow-md');
-        mainNav.classList.remove('bg-transparent');
-        
-        // Change ALL buttons and their SVGs to black
-        const allButtons = mainNav.querySelectorAll('button');
-        allButtons.forEach(function(btn) {
-            btn.classList.remove('text-white');
-            btn.classList.add('text-gray-900');
+    // Header is clean white background like Graff - no scroll changes needed
         });
         
         // Change hamburger lines to black
