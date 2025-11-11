@@ -120,7 +120,8 @@ function getSelectedColors() {
 function saveProduct() {
     const name = document.getElementById('product-name').value.trim();
     const category = document.getElementById('product-category').value;
-    const price = parseFloat(document.getElementById('product-price').value);
+    const priceInput = document.getElementById('product-price').value;
+    const price = priceInput ? parseFloat(priceInput) : null; // null = Price on Request
     const stock = parseInt(document.getElementById('product-stock').value);
     const description = document.getElementById('product-description').value.trim();
     const details = document.getElementById('product-details').value.trim();
@@ -129,7 +130,7 @@ function saveProduct() {
     const colors = getSelectedColors();
     
     // Validation
-    if (!name || !category || !price || !stock || !description) {
+    if (!name || !category || !stock || !description) {
         showNotification('Please fill in all required fields', 'error');
         return;
     }
@@ -154,7 +155,7 @@ function saveProduct() {
         sku: document.getElementById('product-sku').value || generateSKU(),
         name: name,
         category: category,
-        price: price,
+        price: price, // Can be null for "Price on Request"
         stock: stock,
         description: description,
         details: details,
@@ -192,7 +193,7 @@ function editProduct(productId) {
     // Populate form
     document.getElementById('product-name').value = product.name;
     document.getElementById('product-category').value = product.category;
-    document.getElementById('product-price').value = product.price;
+    document.getElementById('product-price').value = product.price !== null ? product.price : '';
     document.getElementById('product-stock').value = product.stock;
     document.getElementById('product-description').value = product.description;
     document.getElementById('product-details').value = product.details || '';
@@ -270,6 +271,12 @@ function populateProductsTable() {
     products.forEach(product => {
         const row = document.createElement('tr');
         row.className = 'hover:bg-gray-50 transition-colors';
+        
+        // Format price - show "Price on Request" if null
+        const priceDisplay = product.price !== null 
+            ? `AED ${product.price.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`
+            : '<span class="text-gray-500 italic">Price on Request</span>';
+        
         row.innerHTML = `
             <td class="px-6 py-4">
                 <div class="flex items-center">
@@ -281,7 +288,7 @@ function populateProductsTable() {
                 </div>
             </td>
             <td class="px-6 py-4 text-sm text-gray-900 capitalize">${product.category.replace('-', ' ')}</td>
-            <td class="px-6 py-4 text-sm font-medium text-gray-900">$${product.price.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+            <td class="px-6 py-4 text-sm font-medium text-gray-900">${priceDisplay}</td>
             <td class="px-6 py-4 text-sm">
                 <span class="font-medium ${getStockColorClass(product.stock)}">${product.stock}</span>
             </td>
@@ -366,7 +373,7 @@ function loadProducts() {
                 sku: 'MG00001',
                 name: 'Elegant Evening Dress',
                 category: 'couture',
-                price: 2850,
+                price: 10500, // AED price
                 stock: 12,
                 description: 'Crafted from the finest silk with hand-sewn details, this elegant evening dress embodies timeless sophistication.',
                 details: '• Material: 100% Silk\n• Made in Italy\n• Dry clean only\n• Hand-sewn beadwork',
