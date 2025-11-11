@@ -1,90 +1,168 @@
-# Mohsen Ghohary Luxury Fashion Website - AI Coding Instructions
+# Mohsen Ghohary Luxury Fashion - AI Coding Guide
 
 ## Architecture Overview
-This is a luxury fashion e-commerce website built with vanilla HTML/CSS/JS and Tailwind CSS. The site uses a modular approach with a separate header component loaded dynamically across pages.
+Pure vanilla HTML/CSS/JS luxury e-commerce site using CDN Tailwind. **No build tools** - all code runs directly in browser. Component-based architecture through dynamic HTML injection.
 
-### Core Components
-- `index.html` - Main landing page with hero, collections, products, about, and contact sections
-- `header.html` - Shared navigation component with mobile menu and search overlays
-- `load-header.js` - Header injection script with interactive behaviors
+### File Structure & Data Flow
+```
+index.html (landing) → #header-placeholder → fetch('header.html') → load-header.js initializes
+                     → #footer-placeholder → fetch('footer.html') → load-footer.js initializes
+product.html/account.html → Same pattern, reuse header/footer
+```
 
-## Design System & Styling Patterns
+**Critical**: All pages require `<div id="header-placeholder">` and `<div id="footer-placeholder">` + corresponding script tags. Header/footer are standalone HTML fragments (no `<!DOCTYPE>`, no `<html>` tags).
 
-### Typography Hierarchy
-- Primary font: 'Playfair Display' (serif) for headings and luxury feel
-- Secondary font: 'Montserrat' (sans-serif) for body text and UI elements
-- Use `.font-sans` class to apply Montserrat
-- Letter spacing: Consistent `tracking-wide` and `tracking-widest` classes
+### Component Loading Pattern (Universal)
+```javascript
+fetch('component.html')
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById('placeholder').innerHTML = data;
+        setTimeout(initializeComponent, 100); // 100ms delay critical for DOM readiness
+    });
+```
+The 100ms timeout prevents race conditions where event listeners attach to non-existent elements.
 
-### Visual Language
-- **Color scheme**: Black, white, grays with minimal color palette
-- **Spacing**: Generous whitespace using `py-20`, `px-6` patterns
-- **Hover effects**: Scale transforms (`hover:scale-110`, `hover:scale-105`) with 300-700ms durations
-- **Images**: Use Unsplash with `w=1200&q=80` or `w=600&q=80` format for consistent quality
+## Design System
 
-### Component Patterns
+### Typography Scale
+- **Headings**: `font-light tracking-[0.2em]` (Playfair Display serif)
+- **Body/UI**: `.font-sans tracking-wide` (Montserrat)
+- **Responsive**: `text-xl md:text-2xl lg:text-3xl` pattern with multiple breakpoints
+- **Uppercase labels**: `text-xs tracking-[0.2em]` for categories/metadata
+
+### Spacing System
+- **Sections**: `py-16 md:py-24 lg:py-32` (progressive spacing)
+- **Containers**: `max-w-7xl mx-auto px-6`
+- **Grids**: `grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8`
+
+### Animation Philosophy
+Luxury = subtlety. Standard pattern:
+```css
+transition-all duration-700 hover:scale-105
+```
+Overlays: opacity + transform transitions (500ms). Stagger menu items with `setTimeout(..., index * 100)`.
+
+### Image Strategy
+Unsplash CDN only: `https://images.unsplash.com/photo-[id]?w=800&q=80`. Aspect ratios: `aspect-[3/4]` for products, `h-96 md:h-[32rem]` for heroes.
+
+## Header System (Critical Implementation Details)
+
+### Navigation Color States
+Two modes controlled by scroll position + hover:
+1. **Transparent**: `bg-transparent text-white` (hero overlay state)
+2. **Solid**: `bg-white shadow-md text-gray-900` (scrolled/hover state)
+
+**Implementation quirk**: State change functions (`changeToWhite`, `changeToTransparent`) must update EVERY element:
+- Buttons (`#hamburger-btn`, `#search-btn`, `#account-btn`, `#cart-btn`)
+- Icon parts (`.hamburger-line`, `.search-circle`, `.cart-body`, etc.)
+- Logo link
+- Desktop menu links (`.hidden.md\\:flex a`)
+
+Missing any element = visual inconsistency. See `load-header.js` lines 20-140 for complete pattern.
+
+### Overlay Management
+Three overlays with identical lifecycle:
+```javascript
+// Open: remove 'hidden' → 10ms delay → remove 'opacity-0'
+overlay.classList.remove('hidden');
+setTimeout(() => overlay.classList.add('opacity-100'), 10);
+document.body.style.overflow = 'hidden'; // Prevent scroll
+
+// Close: remove 'opacity-100' → 300ms delay → add 'hidden'
+overlay.classList.add('opacity-0');
+setTimeout(() => overlay.classList.add('hidden'), 300);
+document.body.style.overflow = 'auto';
+```
+
+### Shopping Cart State
+Lives in `localStorage` under key `'luxuryCart'`. Structure:
+```javascript
+{id, name, price, image, size, color, quantity}[]
+```
+Functions: `addToCart()`, `removeFromCart()`, `updateCartQuantity()` - all update display + storage. Cart badge shows count with scale animation. Promo codes: hardcoded object in `applyPromoCode()`.
+
+## Page-Specific Patterns
+
+### product.html
+Dynamic product loading via URL params (planned) or predefined product data object. Product images in gallery with thumbnail navigation. Size selector buttons: `border hover:border-black hover:bg-black hover:text-white`.
+
+### account.html
+Form inputs use floating label pattern:
 ```html
-<!-- Product Card Pattern -->
+<input class="luxury-input" placeholder=" " />
+<label class="input-label">Email</label>
+```
+CSS transforms label on `:focus` and `:not(:placeholder-shown)`.
+
+## Responsive Strategy
+Mobile-first with Tailwind breakpoints (`md:`, `lg:`, `xl:`). Common patterns:
+- Navigation: Mobile hamburger menu; desktop horizontal links (`hidden md:flex`)
+- Grids: `grid-cols-1 md:grid-cols-2 lg:grid-cols-3`
+- Typography: Scale at each breakpoint (`text-4xl md:text-5xl lg:text-6xl`)
+- Spacing: Increase padding/margins with viewport (`py-16 md:py-24`)
+
+## Critical Gotchas
+
+1. **Header initialization race condition**: Without `setTimeout(..., 100)` in component loaders, event listeners fail silently
+2. **Navigation state sync**: Changing one icon color requires updating ALL icons (12+ elements) - see `changeToWhite()` function
+3. **Overlay body scroll**: Must set `document.body.style.overflow = 'hidden'` when opening overlays, restore to `'auto'` when closing
+4. **localStorage cart**: No backend - cart persists only in browser. Clear on checkout or page works in isolation
+5. **Escape key handling**: Must close active overlay (search/menu/cart) - check visibility state before closing
+
+## Adding New Pages
+1. Copy structure from `product.html` or `account.html`
+2. Include header/footer placeholders + scripts: `<script src="load-header.js"></script>`
+3. Add page-specific script after placeholders
+4. Use `pt-20 md:pt-24` top padding to account for fixed header
+5. Follow section structure: `<section class="py-20 px-6"><div class="max-w-7xl mx-auto">...</div></section>`
+
+## Component Patterns Library
+
+### Product Card
+```html
 <div class="group cursor-pointer">
-    <div class="relative overflow-hidden mb-4">
-        <img class="transition-transform duration-700 group-hover:scale-105" />
+    <div class="relative overflow-hidden mb-4 bg-white">
+        <img class="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-105" />
     </div>
-    <p class="text-xs font-sans tracking-widest text-gray-500">CATEGORY</p>
-    <h3 class="text-lg font-light tracking-wide">Product Name</h3>
-    <p class="font-sans text-sm">$X,XXX</p>
+    <p class="text-xs font-sans tracking-widest text-gray-500 mb-1">CATEGORY</p>
+    <h3 class="text-lg font-light mb-2 tracking-wide">Product Name</h3>
+    <p class="font-sans text-sm tracking-wide">$X,XXX</p>
 </div>
 ```
 
-## Header Component System
-
-### Dynamic Loading Pattern
-The header is loaded via `fetch('header.html')` and injected into `#header-placeholder`. Always include a 100ms timeout before initializing to ensure DOM elements are ready.
-
-### Navigation States
-- **Transparent**: Default state with white text (`text-white`)
-- **Solid**: Scroll/hover state with black text (`text-gray-900`) and white background (`bg-white shadow-md`)
-- State changes affect ALL buttons, SVGs, logo, and menu links simultaneously
-
-### Interactive Elements
-- Mobile menu: Full-screen overlay (`fixed inset-0 bg-black/95`)
-- Search overlay: White overlay with large input field (`text-4xl md:text-6xl`)
-- Both overlays prevent body scroll with `overflow-hidden`
-
-## Content Patterns
-
-### Section Structure
+### CTA Buttons
 ```html
-<section class="py-20 px-6">
-    <div class="max-w-7xl mx-auto">
-        <h2 class="text-4xl md:text-5xl font-light text-center mb-16 tracking-wide">
-            Section Title
-        </h2>
-        <!-- Content grid typically md:grid-cols-3 -->
-    </div>
-</section>
+<!-- Primary (light bg) -->
+<button class="bg-white text-black px-8 py-3 font-sans text-sm tracking-widest hover:bg-gray-100 transition-all duration-300">
+    BUTTON TEXT
+</button>
+
+<!-- Secondary (dark bg) -->
+<button class="border border-white text-white px-8 py-3 font-sans text-sm tracking-widest hover:bg-white hover:text-black transition-all duration-500">
+    BUTTON TEXT
+</button>
 ```
 
-### Price Display
-Always format as `$X,XXX` with comma separators for thousands. Use `font-sans text-sm tracking-wide` for price styling.
+### Section Header
+```html
+<div class="text-center mb-16 md:mb-24">
+    <div class="w-24 h-px bg-gray-300 mx-auto mb-8"></div>
+    <h2 class="text-4xl md:text-5xl lg:text-6xl font-light tracking-[0.2em] mb-6">
+        SECTION TITLE
+    </h2>
+    <p class="text-lg text-gray-600 font-sans max-w-2xl mx-auto leading-relaxed">
+        Section description text
+    </p>
+</div>
+```
 
-### CTA Buttons
-- Primary: `bg-white text-black px-8 py-3 font-sans text-sm tracking-widest`
-- Secondary: `border border-black px-8 py-3 font-sans text-sm tracking-widest hover:bg-black hover:text-white`
-
-## Responsive Behavior
-- Mobile-first approach with `md:` breakpoints
-- Grid layouts: Single column mobile, 3-column desktop (`grid md:grid-cols-3`)
-- Typography scales: `text-xl md:text-2xl` pattern for responsive text
-- Hide desktop menu on mobile: `hidden md:flex`
-
-## Development Workflow
-- No build process - direct file editing
-- Use CDN Tailwind (`https://cdn.tailwindcss.com`)
-- Test header functionality after any navigation changes
-- Verify both mobile menu and search overlay interactions
-- Always test scroll/hover state changes for navigation
-
-## Key Files for Context
-- Reference `header.html` for navigation patterns and overlay structures
-- Check `load-header.js` for interactive behavior implementation
-- Use `index.html` sections as templates for new page content
+## Testing Checklist
+- [ ] Header transitions (transparent → white) on scroll past 50px
+- [ ] All overlays open/close smoothly with Escape key
+- [ ] Cart persists after page reload (localStorage)
+- [ ] Mobile menu covers full screen, prevents scroll
+- [ ] Form inputs have floating labels
+- [ ] All images use Unsplash CDN with proper dimensions
+- [ ] Responsive breakpoints work at md/lg/xl
+- [ ] Hover states use appropriate transition durations
