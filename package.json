@@ -1,0 +1,26 @@
+{
+  "name": "mg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "account.js",
+  "scripts": {
+    "build-css": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+    "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ghohary/mohsenghohary.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Ghohary/mohsenghohary/issues"
+  },
+  "homepage": "https://github.com/Ghohary/mohsenghohary#readme",
+  "devDependencies": {
+    "tailwindcss": "^4.1.17"
+  }
+}

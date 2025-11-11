@@ -1,0 +1,166 @@
+/* Mohsen Ghohary Luxury Fashion - Production CSS */
+
+/* Reset and base styles */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: #e5e7eb;
+}
+
+html {
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  -moz-tab-size: 4;
+  tab-size: 4;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+}
+
+body {
+  margin: 0;
+  line-height: inherit;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Header Navigation */
+.luxury-header {
+  position: fixed;
+  width: 100%;
+  z-index: 50;
+  background-color: white;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  transition: all 0.7s;
+  padding: 0.75rem 0;
+}
+
+.header-container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .header-container {
+    padding: 0 2rem;
+  }
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo */
+.luxury-logo {
+  font-family: 'Baskerville', 'Libre Baskerville', 'Times New Roman', serif;
+  font-size: 1.25rem;
+  letter-spacing: 0.15em;
+  color: black;
+  text-decoration: none;
+  transition: color 0.3s;
+  font-weight: 400;
+}
+
+@media (min-width: 1024px) {
+  .luxury-logo {
+    font-size: 1.5rem;
+  }
+}
+
+.luxury-logo:hover {
+  color: #4b5563;
+}
+
+/* Icon Navigation */
+.icon-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .icon-nav {
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .icon-nav {
+    gap: 1.25rem;
+  }
+}
+
+.icon-button {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.icon-button:hover {
+  color: #4b5563;
+}
+
+.icon-button svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Cart Badge */
+.cart-badge {
+  position: absolute;
+  top: -0.25rem;
+  right: -0.25rem;
+  background-color: black;
+  color: white;
+  font-size: 0.75rem;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+}
+
+.cart-badge.hidden {
+  display: none;
+}
+
+/* Utility classes */
+.fixed { position: fixed; }
+.w-full { width: 100%; }
+.z-50 { z-index: 50; }
+.bg-white { background-color: white; }
+.shadow-sm { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); }
+.transition-all { transition-property: all; }
+.duration-700 { transition-duration: 0.7s; }
+.py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+.flex { display: flex; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.text-black { color: black; }
+.hover\:text-gray-600:hover { color: #4b5563; }
+.transition-colors { transition-property: color; }
+.duration-300 { transition-duration: 0.3s; }
+.relative { position: relative; }
+.absolute { position: absolute; }
+.hidden { display: none; }
+.opacity-0 { opacity: 0; }
+
+/* Responsive utilities */
+@media (min-width: 1024px) {
+  .lg\:px-8 { padding-left: 2rem; padding-right: 2rem; }
+  .lg\:text-2xl { font-size: 1.5rem; line-height: 2rem; }
+}

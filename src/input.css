@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom luxury styles */
+@layer components {
+  .luxury-header {
+    @apply fixed w-full z-50 bg-white shadow-sm transition-all duration-700 py-3;
+  }
+  
+  .luxury-logo {
+    font-family: 'Baskerville', 'Libre Baskerville', 'Times New Roman', serif;
+    @apply text-xl lg:text-2xl tracking-luxury text-black hover:text-gray-600 transition-colors duration-300;
+  }
+  
+  .icon-button {
+    @apply w-10 h-10 flex items-center justify-center text-black hover:text-gray-600 transition-all duration-300;
+  }
+}
