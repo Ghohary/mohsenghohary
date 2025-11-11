@@ -149,7 +149,7 @@ function initializeHeader() {
         });
     }
     
-    // Header is now always white with black icons - no scroll/hover color changes needed
+    // Header is now transparent with white icons by default - perfect for video background
     
     // Enhanced hamburger menu functionality
     if (hamburgerBtn && mobileMenu) {

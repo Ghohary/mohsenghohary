@@ -1,0 +1,36 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Silk Midi Dress",
+      "category": "READY-TO-WEAR",
+      "price": 2850,
+      "image": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600&q=80",
+      "description": "Elegant silk midi dress perfect for evening occasions"
+    },
+    {
+      "id": 2,
+      "name": "Leather Tote",
+      "category": "ACCESSORIES",
+      "price": 1650,
+      "image": "https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=600&q=80",
+      "description": "Handcrafted leather tote with premium finish"
+    },
+    {
+      "id": 3,
+      "name": "Wool Coat",
+      "category": "READY-TO-WEAR",
+      "price": 3200,
+      "image": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=600&q=80",
+      "description": "Luxurious wool coat for winter elegance"
+    },
+    {
+      "id": 4,
+      "name": "Embroidered Evening Gown",
+      "category": "HAUTE COUTURE",
+      "price": 15000,
+      "image": "https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=600&q=80",
+      "description": "Hand-embroidered couture evening gown"
+    }
+  ]
+}
