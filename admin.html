@@ -16,39 +16,417 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
         .admin-card {
             animation: fadeInUp 0.5s ease-out;
         }
         
-        /* Custom file upload styles */
-        .file-upload-area {
+        /* Image upload area */
+        .image-upload-container {
+            position: relative;
             border: 2px dashed #d1d5db;
+            border-radius: 0.5rem;
             transition: all 0.3s ease;
+            background: #fafafa;
         }
         
-        .file-upload-area:hover {
+        .image-upload-container:hover {
             border-color: #000;
-            background-color: #f9fafb;
+            background: #f5f5f5;
         }
         
-        .file-upload-area.dragover {
+        .image-upload-container.has-image {
+            border-style: solid;
+            border-color: #10b981;
+        }
+        
+        /* Preview images */
+        .preview-image {
+            position: relative;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        .preview-image img {
+            transition: transform 0.3s ease;
+        }
+        
+        .preview-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .remove-image {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 28px;
+            height: 28px;
+            background: #ef4444;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            font-size: 18px;
+            line-height: 1;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        .preview-image:hover .remove-image {
+            opacity: 1;
+        }
+        
+        /* Color picker */
+        .color-option {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+        
+        .color-option.selected {
             border-color: #000;
-            background-color: #f3f4f6;
+            box-shadow: 0 0 0 2px #fff, 0 0 0 4px #000;
+        }
+        
+        /* Size selector */
+        .size-option {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .size-option:hover {
+            border-color: #9ca3af;
+        }
+        
+        .size-option.selected {
+            background: #000;
+            color: #fff;
+            border-color: #000;
+        }
+        
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            z-index: 1000;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        .notification.success {
+            background: #10b981;
+            color: white;
+        }
+        
+        .notification.error {
+            background: #ef4444;
+            color: white;
         }
     </style>
 </head>
 <body class="bg-gray-50 font-sans">
     <!-- Admin Header -->
-    <header class="bg-white shadow-sm border-b">
+    <header class="bg-black text-white shadow-lg">
         <div class="max-w-7xl mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
                 <div>
-                    <h1 class="text-2xl font-light tracking-wide">ADMIN DASHBOARD</h1>
-                    <p class="text-sm text-gray-600 font-sans">Mohsen Ghohary Product Management</p>
+                    <h1 class="text-2xl font-light tracking-[0.2em]">MOHSEN GHOHARY</h1>
+                    <p class="text-sm text-gray-400 tracking-wide mt-1">Product Management System</p>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <button onclick="exportProducts()" class="bg-green-600 text-white px-4 py-2 rounded font-sans text-sm hover:bg-green-700 transition-colors">
-                        Export Data
+                    <a href="index.html" class="text-sm tracking-wide hover:text-gray-300 transition-colors">
+                        VIEW STORE
+                    </a>
+                    <button onclick="exportProducts()" class="bg-white text-black px-4 py-2 text-sm tracking-wide hover:bg-gray-200 transition-colors">
+                        EXPORT DATA
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Stats Overview -->
+    <div class="max-w-7xl mx-auto px-6 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-lg shadow admin-card">
+                <p class="text-gray-500 text-xs tracking-[0.2em] mb-2">TOTAL PRODUCTS</p>
+                <p class="text-3xl font-light" id="total-products">0</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow admin-card" style="animation-delay: 0.1s">
+                <p class="text-gray-500 text-xs tracking-[0.2em] mb-2">IN STOCK</p>
+                <p class="text-3xl font-light text-green-600" id="in-stock">0</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow admin-card" style="animation-delay: 0.2s">
+                <p class="text-gray-500 text-xs tracking-[0.2em] mb-2">LOW STOCK</p>
+                <p class="text-3xl font-light text-yellow-600" id="low-stock">0</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow admin-card" style="animation-delay: 0.3s">
+                <p class="text-gray-500 text-xs tracking-[0.2em] mb-2">OUT OF STOCK</p>
+                <p class="text-3xl font-light text-red-600" id="out-of-stock">0</p>
+            </div>
+        </div>
+
+        <!-- Add Product Form -->
+        <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-light tracking-wide mb-8">Add New Product</h2>
+            
+            <form id="product-form">
+                <!-- Basic Info -->
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div>
+                        <label class="block text-sm tracking-wide mb-3 font-medium">PRODUCT NAME *</label>
+                        <input 
+                            type="text" 
+                            id="product-name" 
+                            required
+                            class="w-full border-2 border-gray-200 px-4 py-3 focus:outline-none focus:border-black transition-colors"
+                            placeholder="Elegant Evening Dress"
+                        />
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm tracking-wide mb-3 font-medium">CATEGORY *</label>
+                        <select 
+                            id="product-category" 
+                            required
+                            class="w-full border-2 border-gray-200 px-4 py-3 focus:outline-none focus:border-black transition-colors"
+                        >
+                            <option value="">Select Category</option>
+                            <option value="ready-to-wear">Ready-to-Wear</option>
+                            <option value="men">Men</option>
+                            <option value="abaya">Abaya</option>
+                            <option value="couture">Couture</option>
+                            <option value="bridal">Bridal</option>
+                            <option value="accessories">Accessories</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8 mb-8">
+                    <div>
+                        <label class="block text-sm tracking-wide mb-3 font-medium">PRICE ($) *</label>
+                        <input 
+                            type="number" 
+                            id="product-price" 
+                            required
+                            min="0"
+                            step="0.01"
+                            class="w-full border-2 border-gray-200 px-4 py-3 focus:outline-none focus:border-black transition-colors"
+                            placeholder="2850.00"
+                        />
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm tracking-wide mb-3 font-medium">STOCK QUANTITY *</label>
+                        <input 
+                            type="number" 
+                            id="product-stock" 
+                            required
+                            min="0"
+                            class="w-full border-2 border-gray-200 px-4 py-3 focus:outline-none focus:border-black transition-colors"
+                            placeholder="10"
+                        />
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm tracking-wide mb-3 font-medium">SKU</label>
+                        <input 
+                            type="text" 
+                            id="product-sku"
+                            class="w-full border-2 border-gray-200 px-4 py-3 bg-gray-50"
+                            placeholder="Auto-generated"
+                            readonly
+                        />
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="mb-8">
+                    <label class="block text-sm tracking-wide mb-3 font-medium">DESCRIPTION *</label>
+                    <textarea 
+                        id="product-description" 
+                        required
+                        rows="4"
+                        class="w-full border-2 border-gray-200 px-4 py-3 focus:outline-none focus:border-black transition-colors"
+                        placeholder="Describe the product in detail..."
+                    ></textarea>
+                </div>
+
+                <!-- Images Upload -->
+                <div class="mb-8">
+                    <label class="block text-sm tracking-wide mb-3 font-medium">PRODUCT IMAGES *</label>
+                    <p class="text-sm text-gray-500 mb-4">Upload product images or paste Unsplash URLs</p>
+                    
+                    <!-- Image URL Input -->
+                    <div class="flex gap-4 mb-4">
+                        <input 
+                            type="url" 
+                            id="image-url-input"
+                            class="flex-1 border-2 border-gray-200 px-4 py-3 focus:outline-none focus:border-black transition-colors"
+                            placeholder="https://images.unsplash.com/..."
+                        />
+                        <button 
+                            type="button"
+                            onclick="addImageFromURL()"
+                            class="bg-black text-white px-6 py-3 tracking-wide text-sm hover:bg-gray-800 transition-colors"
+                        >
+                            ADD IMAGE
+                        </button>
+                    </div>
+                    
+                    <!-- OR divider -->
+                    <div class="flex items-center my-6">
+                        <div class="flex-1 border-t border-gray-300"></div>
+                        <span class="px-4 text-sm text-gray-500">OR</span>
+                        <div class="flex-1 border-t border-gray-300"></div>
+                    </div>
+                    
+                    <!-- File Upload -->
+                    <div class="image-upload-container p-8 text-center cursor-pointer" onclick="document.getElementById('file-input').click()">
+                        <svg class="w-12 h-12 mx-auto mb-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                        </svg>
+                        <p class="text-gray-600 mb-2">Click to upload or drag and drop</p>
+                        <p class="text-sm text-gray-400">PNG, JPG, WEBP up to 10MB</p>
+                        <input 
+                            type="file" 
+                            id="file-input"
+                            accept="image/*"
+                            multiple
+                            class="hidden"
+                            onchange="handleFileUpload(event)"
+                        />
+                    </div>
+                    
+                    <!-- Image Preview Grid -->
+                    <div id="image-preview" class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+                        <!-- Images will appear here -->
+                    </div>
+                </div>
+
+                <!-- Sizes -->
+                <div class="mb-8">
+                    <label class="block text-sm tracking-wide mb-3 font-medium">AVAILABLE SIZES *</label>
+                    <div id="sizes-container" class="flex flex-wrap gap-3">
+                        <div class="size-option" data-size="XXS" onclick="toggleSize(this)">XXS</div>
+                        <div class="size-option" data-size="XS" onclick="toggleSize(this)">XS</div>
+                        <div class="size-option" data-size="S" onclick="toggleSize(this)">S</div>
+                        <div class="size-option" data-size="M" onclick="toggleSize(this)">M</div>
+                        <div class="size-option" data-size="L" onclick="toggleSize(this)">L</div>
+                        <div class="size-option" data-size="XL" onclick="toggleSize(this)">XL</div>
+                        <div class="size-option" data-size="XXL" onclick="toggleSize(this)">XXL</div>
+                        <div class="size-option" data-size="XXXL" onclick="toggleSize(this)">XXXL</div>
+                    </div>
+                </div>
+
+                <!-- Colors -->
+                <div class="mb-8">
+                    <label class="block text-sm tracking-wide mb-3 font-medium">AVAILABLE COLORS *</label>
+                    <div id="colors-container" class="flex flex-wrap gap-4">
+                        <div class="color-option" style="background: #000" data-color="black" data-color-name="Black" onclick="toggleColor(this)" title="Black"></div>
+                        <div class="color-option" style="background: #fff; border: 2px solid #e5e7eb" data-color="white" data-color-name="White" onclick="toggleColor(this)" title="White"></div>
+                        <div class="color-option" style="background: #1e3a8a" data-color="navy" data-color-name="Navy" onclick="toggleColor(this)" title="Navy"></div>
+                        <div class="color-option" style="background: #7f1d1d" data-color="burgundy" data-color-name="Burgundy" onclick="toggleColor(this)" title="Burgundy"></div>
+                        <div class="color-option" style="background: #064e3b" data-color="emerald" data-color-name="Emerald" onclick="toggleColor(this)" title="Emerald"></div>
+                        <div class="color-option" style="background: #701a75" data-color="purple" data-color-name="Purple" onclick="toggleColor(this)" title="Purple"></div>
+                        <div class="color-option" style="background: #f59e0b" data-color="gold" data-color-name="Gold" onclick="toggleColor(this)" title="Gold"></div>
+                        <div class="color-option" style="background: #dc2626" data-color="red" data-color-name="Red" onclick="toggleColor(this)" title="Red"></div>
+                        <div class="color-option" style="background: #334155" data-color="gray" data-color-name="Gray" onclick="toggleColor(this)" title="Gray"></div>
+                        <div class="color-option" style="background: #f8fafc; border: 2px solid #e5e7eb" data-color="ivory" data-color-name="Ivory" onclick="toggleColor(this)" title="Ivory"></div>
+                    </div>
+                </div>
+
+                <!-- Product Details -->
+                <div class="mb-8">
+                    <label class="block text-sm tracking-wide mb-3 font-medium">PRODUCT DETAILS</label>
+                    <textarea 
+                        id="product-details"
+                        rows="5"
+                        class="w-full border-2 border-gray-200 px-4 py-3 focus:outline-none focus:border-black transition-colors"
+                        placeholder="• Material: 100% Silk&#10;• Made in Italy&#10;• Dry clean only&#10;• Hand-sewn details"
+                    ></textarea>
+                </div>
+
+                <!-- Featured Product -->
+                <div class="mb-8 flex items-center">
+                    <input 
+                        type="checkbox" 
+                        id="product-featured"
+                        class="w-5 h-5 mr-3"
+                    />
+                    <label class="text-sm tracking-wide font-medium cursor-pointer" for="product-featured">MARK AS FEATURED PRODUCT</label>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="flex justify-end space-x-4 pt-6 border-t border-gray-200">
+                    <button 
+                        type="button"
+                        onclick="clearForm()"
+                        class="px-8 py-3 border-2 border-gray-300 tracking-wide text-sm hover:bg-gray-50 transition-colors"
+                    >
+                        CLEAR FORM
+                    </button>
+                    <button 
+                        type="submit"
+                        class="px-8 py-3 bg-black text-white tracking-wide text-sm hover:bg-gray-800 transition-colors"
+                    >
+                        SAVE PRODUCT
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Products List -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
+                <h2 class="text-xl font-light tracking-wide">Product Inventory</h2>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-50 border-b">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs tracking-wider text-gray-500 uppercase">Product</th>
+                            <th class="px-6 py-3 text-left text-xs tracking-wider text-gray-500 uppercase">Category</th>
+                            <th class="px-6 py-3 text-left text-xs tracking-wider text-gray-500 uppercase">Price</th>
+                            <th class="px-6 py-3 text-left text-xs tracking-wider text-gray-500 uppercase">Stock</th>
+                            <th class="px-6 py-3 text-left text-xs tracking-wider text-gray-500 uppercase">Status</th>
+                            <th class="px-6 py-3 text-left text-xs tracking-wider text-gray-500 uppercase">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="products-table-body" class="divide-y divide-gray-200">
+                        <!-- Products will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
                     </button>
                     <button onclick="backupProducts()" class="bg-blue-600 text-white px-4 py-2 rounded font-sans text-sm hover:bg-blue-700 transition-colors">
                         Backup
