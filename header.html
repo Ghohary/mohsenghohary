@@ -4,28 +4,20 @@
         <div class="flex items-center justify-between">
             <!-- Left side: Hamburger and Search -->
             <div class="flex-1 flex items-center space-x-4 sm:space-x-6 md:space-x-8 lg:space-x-10">
-                <!-- Animated Hamburger menu -->
-                <button id="hamburger-btn" class="group cursor-pointer text-white hover:text-gray-300 transition-all duration-300 flex flex-col justify-center items-center w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 relative overflow-hidden">
-                    <div class="hamburger-container">
-                        <span class="hamburger-line block w-5 sm:w-6 lg:w-7 h-0.5 bg-current transform transition-all duration-300 ease-in-out"></span>
-                        <span class="hamburger-line block w-5 sm:w-6 lg:w-7 h-0.5 bg-current transform transition-all duration-300 ease-in-out mt-1.5"></span>
-                        <span class="hamburger-line block w-5 sm:w-6 lg:w-7 h-0.5 bg-current transform transition-all duration-300 ease-in-out mt-1.5"></span>
-                    </div>
+                <!-- Elegant Hamburger menu -->
+                <button id="hamburger-btn" class="group cursor-pointer text-white hover:text-gray-300 transition-all duration-300 w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 relative overflow-hidden flex items-center justify-center">
+                    <svg class="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 hamburger-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path class="hamburger-line" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
                 </button>
                 
-                <!-- Enhanced Search icon with luxury styling -->
+                <!-- Elegant Search icon -->
                 <button id="search-btn" class="group cursor-pointer text-white hover:text-gray-300 transition-all duration-300 transform hover:scale-110 relative overflow-hidden">
-                    <!-- Animated search icon -->
-                    <div class="relative w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7">
-                        <!-- Search circle -->
-                        <div class="search-circle absolute inset-0 border-2 border-current rounded-full transition-all duration-300 group-hover:border-gray-300" style="width: 60%; height: 60%; top: 10%; left: 10%;"></div>
-                        <!-- Search handle -->
-                        <div class="search-handle absolute bg-current transition-all duration-300 group-hover:bg-gray-300 transform rotate-45" style="width: 2px; height: 35%; bottom: 8%; right: 8%; border-radius: 1px;"></div>
-                    </div>
+                    <svg class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path class="search-circle search-handle" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
                     <!-- Subtle glow effect on hover -->
                     <div class="absolute inset-0 rounded-full bg-white/0 group-hover:bg-white/10 transition-all duration-300 blur-sm -z-10"></div>
-                    <!-- Ripple effect -->
-                    <div class="absolute inset-0 rounded-full border border-white/0 group-hover:border-white/30 transition-all duration-500 transform scale-100 group-hover:scale-150 opacity-0 group-hover:opacity-100"></div>
                 </button>
             </div>
             
@@ -38,40 +30,26 @@
             
             <!-- Right side: Account and Shopping bag -->
             <div class="flex-1 flex justify-end items-center space-x-4 sm:space-x-6 md:space-x-8 lg:space-x-10">
-                <!-- Enhanced Account icon with luxury styling -->
+                <!-- Elegant Account icon -->
                 <button id="account-btn" class="group cursor-pointer text-white hover:text-gray-300 transition-all duration-300 transform hover:scale-110 relative overflow-hidden">
-                    <!-- Custom account icon -->
-                    <div class="relative w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6">
-                        <!-- Head circle -->
-                        <div class="account-head absolute top-0 left-1/2 transform -translate-x-1/2 w-2 h-2 sm:w-2.5 sm:h-2.5 lg:w-3 lg:h-3 border-2 border-current rounded-full transition-all duration-300 group-hover:border-gray-300"></div>
-                        <!-- Body shape -->
-                        <div class="account-body absolute bottom-0 left-1/2 transform -translate-x-1/2 w-3.5 h-2 sm:w-4 sm:h-2.5 lg:w-5 lg:h-3 border-2 border-current border-t-0 rounded-b-full transition-all duration-300 group-hover:border-gray-300" style="border-top: none;"></div>
-                    </div>
+                    <svg class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 account-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path class="account-head account-body" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
                     <!-- Subtle glow effect on hover -->
                     <div class="absolute inset-0 rounded-full bg-white/0 group-hover:bg-white/10 transition-all duration-300 blur-sm -z-10"></div>
-                    <!-- Ripple effect -->
-                    <div class="absolute inset-0 rounded-full border border-white/0 group-hover:border-white/30 transition-all duration-500 transform scale-100 group-hover:scale-150 opacity-0 group-hover:opacity-100"></div>
                 </button>
                 
-                <!-- Enhanced Shopping bag icon with luxury styling -->
+                <!-- Elegant Shopping bag icon -->
                 <button id="cart-btn" class="group cursor-pointer text-white hover:text-gray-300 transition-all duration-300 transform hover:scale-110 relative overflow-hidden">
-                    <!-- Custom shopping bag icon -->
-                    <div class="relative w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6">
-                        <!-- Bag body -->
-                        <div class="cart-body absolute bottom-0 left-1/2 transform -translate-x-1/2 w-3.5 h-2.5 sm:w-4 sm:h-3 lg:w-5 lg:h-3.5 border-2 border-current rounded-sm transition-all duration-300 group-hover:border-gray-300"></div>
-                        <!-- Bag handles -->
-                        <div class="cart-handle-left absolute top-0 left-1/4 w-1 h-1.5 sm:h-2 border-l-2 border-t-2 border-current rounded-tl-sm transition-all duration-300 group-hover:border-gray-300"></div>
-                        <div class="cart-handle-right absolute top-0 right-1/4 w-1 h-1.5 sm:h-2 border-r-2 border-t-2 border-current rounded-tr-sm transition-all duration-300 group-hover:border-gray-300"></div>
-                    </div>
+                    <svg class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 cart-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path class="cart-body cart-handle-left cart-handle-right" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                    </svg>
                     
                     <!-- Enhanced shopping cart count badge -->
                     <span id="cart-count" class="absolute -top-1.5 -right-1.5 sm:-top-2 sm:-right-2 bg-white text-black text-xs w-4 h-4 sm:w-5 sm:h-5 rounded-full flex items-center justify-center font-medium opacity-0 scale-0 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100 cart-badge">0</span>
                     
                     <!-- Subtle glow effect on hover -->
                     <div class="absolute inset-0 rounded-full bg-white/0 group-hover:bg-white/10 transition-all duration-300 blur-sm -z-10"></div>
-                    
-                    <!-- Ripple effect -->
-                    <div class="absolute inset-0 rounded-full border border-white/0 group-hover:border-white/30 transition-all duration-500 transform scale-100 group-hover:scale-150 opacity-0 group-hover:opacity-100"></div>
                 </button>
             </div>
         </div>
