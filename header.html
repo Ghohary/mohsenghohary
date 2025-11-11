@@ -4,11 +4,18 @@
         <div class="flex items-center justify-between">
             <!-- Left side: Hamburger and Search -->
             <div class="flex-1 flex items-center space-x-4 sm:space-x-6 md:space-x-8 lg:space-x-10">
-                <!-- Elegant Hamburger menu -->
+                <!-- Elegant Hamburger menu / Close button -->
                 <button id="hamburger-btn" class="group cursor-pointer text-gray-900 hover:text-gray-600 transition-all duration-300 w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 relative overflow-hidden flex items-center justify-center">
-                    <svg class="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 hamburger-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Hamburger icon (visible by default) -->
+                    <svg id="hamburger-icon" class="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path class="hamburger-line" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
+                    <!-- Close X icon (hidden by default) -->
+                    <div id="close-icon" class="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300">
+                        <svg class="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </div>
                 </button>
                 
                 <!-- Elegant Search icon -->
@@ -188,22 +195,10 @@
 
 <!-- Enhanced Mobile Menu Overlay (Hidden by default) -->
 <div id="mobile-menu" class="fixed inset-0 z-40 hidden opacity-0 transition-all duration-500 ease-out">
-    <!-- Off-white rectangular menu container with gaps -->
+    <!-- Off-white rectangular menu container -->
     <div class="bg-stone-50 w-full h-full shadow-2xl relative overflow-y-auto">
     
     <div class="flex flex-col h-full relative z-10">
-        <!-- Enhanced Close button with luxury styling - positioned inside menu -->
-        <div class="flex justify-end p-4 sm:p-5 md:p-6 lg:p-8">
-            <button id="close-menu-btn" class="group text-gray-900 hover:text-gray-600 transition-all duration-500 transform hover:scale-110 relative">
-                <!-- Animated close icon -->
-                <div class="relative w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10">
-                    <span class="absolute top-1/2 left-1/2 w-6 sm:w-7 md:w-8 h-0.5 bg-current transform -translate-x-1/2 -translate-y-1/2 rotate-45 transition-all duration-300 group-hover:rotate-90"></span>
-                    <span class="absolute top-1/2 left-1/2 w-6 sm:w-7 md:w-8 h-0.5 bg-current transform -translate-x-1/2 -translate-y-1/2 -rotate-45 transition-all duration-300 group-hover:-rotate-90"></span>
-                </div>
-                <!-- Subtle glow effect -->
-                <div class="absolute inset-0 rounded-full bg-gray-900/0 group-hover:bg-gray-900/5 transition-all duration-300 blur-sm"></div>
-            </button>
-        </div>
         
         <!-- Enhanced Menu Items with staggered animations -->
         <div class="flex-1 flex flex-col items-start justify-center space-y-6 sm:space-y-7 md:space-y-8 lg:space-y-10 font-sans text-gray-900 px-8">

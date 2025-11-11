@@ -149,35 +149,12 @@ function initializeHeader() {
         });
     }
     
-    // Scroll effect
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 50) {
-            isScrolled = true;
-            changeToWhite();
-        } else {
-            isScrolled = false;
-            changeToTransparent();
-        }
-    });
-    
-    // Hover effect
-    if (mainNav) {
-        mainNav.addEventListener('mouseenter', function() {
-            changeToWhite();
-        });
-        
-        mainNav.addEventListener('mouseleave', function() {
-            // Only change back to transparent if not scrolled
-            if (!isScrolled) {
-                changeToTransparent();
-            }
-        });
-    }
+    // Header is now always white with black icons - no scroll/hover color changes needed
     
     // Enhanced hamburger menu functionality
     if (hamburgerBtn && mobileMenu) {
-        // Get hamburger lines for animation
-        const hamburgerLines = hamburgerBtn.querySelectorAll('.hamburger-line');
+        const hamburgerIcon = document.getElementById('hamburger-icon');
+        const closeIcon = document.getElementById('close-icon');
         let isMenuOpen = false;
         
         hamburgerBtn.addEventListener('click', function() {
@@ -185,12 +162,10 @@ function initializeHeader() {
                 // Open menu with luxury animations
                 mobileMenu.classList.remove('hidden');
                 
-                // Animate hamburger to X
-                if (hamburgerLines.length >= 3) {
-                    hamburgerLines[0].style.transform = 'translateY(8px) rotate(45deg)';
-                    hamburgerLines[1].style.opacity = '0';
-                    hamburgerLines[1].style.transform = 'translateX(-10px)';
-                    hamburgerLines[2].style.transform = 'translateY(-8px) rotate(-45deg)';
+                // Toggle icons
+                if (hamburgerIcon && closeIcon) {
+                    hamburgerIcon.style.opacity = '0';
+                    closeIcon.style.opacity = '1';
                 }
                 
                 // Fade in menu overlay
@@ -225,18 +200,18 @@ function initializeHeader() {
                 
                 document.body.style.overflow = 'hidden';
                 isMenuOpen = true;
+            } else {
+                closeMenu();
             }
         });
         
         // Function to close menu with animations
         function closeMenu() {
             if (isMenuOpen) {
-                // Animate hamburger back to normal
-                if (hamburgerLines.length >= 3) {
-                    hamburgerLines[0].style.transform = 'translateY(0) rotate(0)';
-                    hamburgerLines[1].style.opacity = '1';
-                    hamburgerLines[1].style.transform = 'translateX(0)';
-                    hamburgerLines[2].style.transform = 'translateY(0) rotate(0)';
+                // Toggle icons back
+                if (hamburgerIcon && closeIcon) {
+                    hamburgerIcon.style.opacity = '1';
+                    closeIcon.style.opacity = '0';
                 }
                 
                 // Fade out menu
