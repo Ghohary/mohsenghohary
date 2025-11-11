@@ -1,13 +1,24 @@
 // Load header into all pages
+console.log('Loading header...');
 fetch('header.html')
-    .then(response => response.text())
+    .then(response => {
+        console.log('Header response:', response.status);
+        return response.text();
+    })
     .then(data => {
-        document.getElementById('header-placeholder').innerHTML = data;
-        
-        // Wait for elements to be in DOM, then initialize
-        setTimeout(function() {
-            initializeHeader();
-        }, 100);
+        console.log('Header data loaded, length:', data.length);
+        const placeholder = document.getElementById('header-placeholder');
+        console.log('Header placeholder found:', !!placeholder);
+        if (placeholder) {
+            placeholder.innerHTML = data;
+            console.log('Header inserted into placeholder');
+            
+            // Wait for elements to be in DOM, then initialize
+            setTimeout(function() {
+                console.log('Initializing header...');
+                initializeHeader();
+            }, 100);
+        }
     })
     .catch(error => console.error('Error loading header:', error));
 

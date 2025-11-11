@@ -1,19 +1,24 @@
 // Load footer component and initialize functionality
 async function loadFooter() {
+    console.log('Loading footer...');
     try {
         const footerPlaceholder = document.getElementById('footer-placeholder');
+        console.log('Footer placeholder found:', !!footerPlaceholder);
         if (!footerPlaceholder) {
             console.warn('Footer placeholder not found');
             return;
         }
 
         const response = await fetch('footer.html');
+        console.log('Footer response:', response.status);
         if (!response.ok) {
             throw new Error(`Failed to load footer: ${response.status}`);
         }
         
         const footerHTML = await response.text();
+        console.log('Footer HTML loaded, length:', footerHTML.length);
         footerPlaceholder.innerHTML = footerHTML;
+        console.log('Footer inserted successfully');
         
         // Initialize footer functionality after a short delay
         setTimeout(initializeFooter, 100);
